@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 
 import '../model/Word.dart';
@@ -18,8 +17,16 @@ class WordList extends StatefulWidget {
 
 // Adapted from https://api.flutter.dev/flutter/material/DataTable-class.html
 class _WordListState extends State<WordList> {
-  static const int MAX_SIZE = 1000000000;
-  List<bool> selected = List<bool>.generate(MAX_SIZE, (index) => false);
+  List<bool> selected = List<bool>.generate(1, (index) => false);
+
+  bool checkSelected(int index) {
+    if (index >= selected.length) {
+      selected.add(false);
+      return false;
+    } else {
+      return selected[index];
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +47,7 @@ class _WordListState extends State<WordList> {
                     }),
                     // cells: [DataCell(Text(words[index]))],
                     cells: [DataCell(Text(widget.words[index].word))],
-                    selected: selected[index],
+                    selected: checkSelected(index),
                     onSelectChanged: (bool value) {
                       setState(() {
                         selected[index] = value;
