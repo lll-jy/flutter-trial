@@ -21,7 +21,6 @@ class _WordListState extends State<WordList> {
   static const int num = 10;
   final List<String> words = ['Apple', 'Banana', 'Cat', 'Dog', 'Eat', 'Frank',
     'Grape', 'Hello', 'I', 'Jacket'];
-  //final List<String> words2 = widget.words;
   List<bool> selected = List<bool>.generate(num, (index) => false);
 
   @override

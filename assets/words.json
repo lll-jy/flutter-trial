@@ -1,10 +1,74 @@
 [
   {
-    "word": "Apple",
+    "word": "apple",
     "speech": "n.",
     "glossary": "a round fruit with shiny red or green skin that is fairly hard and white inside",
     "example": "I took a bite of the apple.",
     "createdAt": "2020-12-23 10:45:00",
     "lastReviewAt": "2020-12-23 10:45:00"
+  },
+  {
+    "word": "banana",
+    "speech": "n.",
+    "glossary": "a long curved fruit with a thick yellow skin and that is soft inside, which grows on trees in hot countries",
+    "example": "a bunch of bananas",
+    "createdAt": "2020-12-23 14:12:00",
+    "lastReviewAt": "2020-12-23 14:12:00"
+  },
+  {
+    "word": "cat",
+    "speech": "n.",
+    "glossary": "a small animal with soft fur that people often keep as a pet. Cats catch and kill birds and mice.",
+    "example": "I have a cat called Bo.",
+    "createdAt": "2020-12-23 14:13:00",
+    "lastReviewAt": "2020-12-23 14:13:00"
+  },
+  {
+    "word": "dog",
+    "speech": "n.",
+    "glossary": "an animal with four legs and a tail, often kept as a pet or trained for work, for example hunting or guarding buildings. There are many types of dog, some of which are wild.",
+    "example": "I took the dog for a walk.",
+    "createdAt": "2020-12-23 14:15:00",
+    "lastReviewAt": "2020-12-23 14:15:00"
+  },
+  {
+    "word": "eat",
+    "speech": "v.",
+    "glossary": "to put food in your mouth, bite it and swallow it",
+    "example": "I was too nervous to eat.",
+    "createdAt": "2020-12-23 14:16:00",
+    "lastReviewAt": "2020-12-23 14:16:00"
+  },
+  {
+    "word": "frank",
+    "speech": "adj.",
+    "glossary": "honest and direct in what you say, sometimes in a way that other people might not like",
+    "example": "He was very frank about his relationship with the actress.",
+    "createdAt": "2020-12-23 14:18:00",
+    "lastReviewAt": "2020-12-23 14:18:00"
+  },
+  {
+    "word": "grape",
+    "speech": "n.",
+    "glossary": "a small green or purple fruit that grows in bunches on a climbing plant (called a vine). Wine is made from grapes.",
+    "example": "We picked grapes in the south of France last summer.",
+    "createdAt": "2020-12-23 14:19:00",
+    "lastReviewAt": "2020-12-23 14:19:00"
+  },
+  {
+    "word": "hello",
+    "speech": "interj.",
+    "glossary": "used as a greeting when you meet somebody, in an email, when you answer the phone or when you want to attract somebody’s attention",
+    "example": "Hello John, how are you?",
+    "createdAt": "2020-12-23 14:20:00",
+    "lastReviewAt": "2020-12-23 14:20:00"
+  },
+  {
+    "word": "I",
+    "speech": "pron.",
+    "glossary": "used as the subject of a verb when the speaker or writer is referring to himself/herself",
+    "example": "I think I'd better go now.",
+    "createdAt": "2020-12-23 14:21:00",
+    "lastReviewAt": "2020-12-23 14:21:00"
   }
 ]
