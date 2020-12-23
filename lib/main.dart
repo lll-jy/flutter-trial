@@ -100,7 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),
-
+            WordList()
           ],
         ),
       ),
@@ -121,8 +121,24 @@ class WordList extends StatefulWidget {
 }
 
 class _WordListState extends State<WordList> {
+  static const int num = 10;
+  List<String> words = ['Apple', 'Banana', 'Cat', 'Dog', 'Eat', 'Frank',
+    'Grape', 'Hello', 'I', 'Jacket'];
+
   @override
   Widget build(BuildContext context) {
-    return Text('Test');
+    return SizedBox(
+      width: double.infinity,
+      child: DataTable(
+        columns: const <DataColumn>[
+          DataColumn(label: Text('Words'))
+        ],
+        rows: List<DataRow>.generate(
+            num,
+            (index) => DataRow(
+              cells: [DataCell(Text(words[index]))]
+            ))
+      )
+    );
   }
 }
