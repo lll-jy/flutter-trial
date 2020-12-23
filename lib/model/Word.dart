@@ -1,3 +1,10 @@
+import 'dart:convert';
+import 'dart:io';
+import 'dart:async';
+
+import 'package:intl/intl.dart';
+import 'package:path_provider/path_provider.dart';
+
 enum Speech {
   n, v, adj, adv, article, pron, prep, conj, interj
 }
@@ -18,7 +25,20 @@ class Word {
   Word({this.word, this.speech, this.glossary, this.example,
     this.createdAt, this.lastReviewAt, this.categories});
 
+  static void test() {
+    String json = jsonEncode(Word(
+      word: 'test', speech: Speech.v,
+      glossary: 'test glossary',
+      example: 'this is a test',
+      createdAt: DateTime.parse('2020-12-23 15:25:00'),
+      lastReviewAt: DateTime.parse('2020-12-23 15:25:00'),
+      categories: [Category.GRE]
+    ));
+    //writeCounter(1);
+  }
+
   factory Word.fromJson(Map<String, dynamic> json) {
+    //test();
     return Word(
       word: json['word'] as String,
       speech: strToSpeech(json['speech'] as String),
@@ -26,9 +46,20 @@ class Word {
       example: json['example'] as String,
       createdAt: DateTime.parse(json['createdAt'] as String),
       lastReviewAt: DateTime.parse(json['lastReviewAt'] as String),
-      categories: dynamicListToCategories(json['categories'] as List<dynamic>)
+      categories: (json['categories'] as List<dynamic>).map((e) =>
+          strToCategory(e)).toList()
     );
   }
+
+  Map<String, dynamic> toJson() => {
+    'word': word,
+    'speech': speechToStr(speech),
+    'glossary': glossary,
+    'example': example,
+    'createdAt': DateFormat('yyyy-MM-dd HH:mm:ss').format(createdAt),
+    'lastReviewAt': DateFormat('yyyy-MM-dd HH:mm:ss').format(lastReviewAt),
+    'categories': categories.map((e) => categoryToStr(e)).toList()
+  };
 
   static Speech strToSpeech(String str) {
     switch (str) {
@@ -55,6 +86,31 @@ class Word {
     }
   }
 
+  static String speechToStr(Speech speech) {
+    switch (speech) {
+    case Speech.n:
+      return 'n.';
+    case Speech.v:
+      return 'v.';
+    case Speech.adj:
+      return 'adj.';
+    case Speech.adv:
+      return 'adv.';
+    case Speech.article:
+      return 'article';
+    case Speech.pron:
+      return 'pron.';
+    case Speech.prep:
+      return 'prep.';
+    case Speech.conj:
+      return 'conj.';
+    case Speech.interj:
+      return 'interj.';
+    default:
+      throw Exception('Invalid speech detected.');
+    }
+  }
+
   static Category strToCategory(String str) {
     switch (str) {
     case 'CET4':
@@ -74,7 +130,22 @@ class Word {
     }
   }
 
-  static List<Category> dynamicListToCategories(List<dynamic> strs) {
-    return strs.map((e) => strToCategory(e)).toList();
+  static String categoryToStr(Category category) {
+    switch (category) {
+    case Category.CET4:
+      return 'CET4';
+    case Category.CET8:
+      return 'CET8';
+    case Category.GRE:
+      return 'GRE';
+    case Category.TOEFL:
+      return 'TOEFL';
+    case Category.SAT:
+      return 'SAT';
+    case Category.GMAT:
+      return 'GMAT';
+    default:
+      throw Exception('Invalid category detected.');
+    }
   }
 }

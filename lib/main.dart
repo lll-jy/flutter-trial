@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:path_provider/path_provider.dart';
+
+import 'dart:io';
+import 'dart:async';
 
 import 'components/WordList.dart';
 
@@ -63,14 +67,10 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   String resBody = '';
-  void fetchJson() {
-    rootBundle.loadString('assets/words.json').then((result) {
-      setState(() {
-        if (result is String) {
-          resBody = result;
-        }
-      });
-    });
+  void fetchWords() {
+    Storage.read().then((value) => setState(() {
+      resBody = value;
+    }));
   }
 
   @override
@@ -114,10 +114,7 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),
-            WordList(words: (() {
-              fetchJson();
-              return parseWords(resBody);
-            })())
+            WordList(words: parseWords((() {fetchWords(); return resBody;})()))
           ],
         ),
       ),
@@ -127,5 +124,51 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+}
+
+class Storage {
+  static final String fileName = '/words.txt';
+  static String data = '';
+
+  static Future<String> get _localPath async {
+    final directory = await getApplicationDocumentsDirectory();
+    return directory.path;
+  }
+
+  static Future<File> get _localFile async {
+    final path = await _localPath;
+    File file = File(path + fileName);
+    try {
+      await file.readAsString();
+    } catch (e) {
+      file.create(recursive: true);
+    }
+    return file;
+  }
+
+  static Future<File> write(String data) async {
+    var file = await _localFile;
+    return file.writeAsString(data);
+  }
+
+  static Future<String> read() async {
+    try {
+      final file = await _localFile;
+      String res = await file.readAsString();
+      if (res?.isEmpty ?? true) {
+        final jsonPath = 'assets/words.json';
+        await rootBundle.loadString(jsonPath).then((result) {
+          if (result is String) {
+            data = result;
+          }
+        });
+        await write(data);
+        res = await file.readAsString();
+      }
+      return res;
+    } catch (e) {
+      return e.toString();
+    }
   }
 }
