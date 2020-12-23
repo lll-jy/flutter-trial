@@ -18,10 +18,8 @@ class WordList extends StatefulWidget {
 
 // Adapted from https://api.flutter.dev/flutter/material/DataTable-class.html
 class _WordListState extends State<WordList> {
-  static const int num = 10;
-  final List<String> words = ['Apple', 'Banana', 'Cat', 'Dog', 'Eat', 'Frank',
-    'Grape', 'Hello', 'I', 'Jacket'];
-  List<bool> selected = List<bool>.generate(num, (index) => false);
+  static const int MAX_SIZE = 1000000000;
+  List<bool> selected = List<bool>.generate(MAX_SIZE, (index) => false);
 
   @override
   Widget build(BuildContext context) {
