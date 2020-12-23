@@ -1,5 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'WordList.dart';
+import 'package:flutter/services.dart';
+import 'package:http/http.dart' as http;
+
+import 'dart:convert';
+
+import 'components/WordList.dart';
 
 void main() {
   runApp(MyApp());
@@ -60,6 +67,17 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  String resBody = '';
+  void fetchJson() {
+    rootBundle.loadString('assets/words.json').then((result) {
+      setState(() {
+        if (result is String) {
+          resBody = result;
+        }
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -101,7 +119,10 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),
-            WordList()
+            WordList(words: (() {
+              fetchJson();
+              return parseWords(resBody);
+            })())
           ],
         ),
       ),
