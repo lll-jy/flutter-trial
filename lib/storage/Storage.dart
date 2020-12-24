@@ -35,16 +35,6 @@ class Storage {
     try {
       final file = await _localFile;
       String res = await file.readAsString();
-      if (res?.isEmpty ?? true) {
-        final jsonPath = 'assets/words.json';
-        await rootBundle.loadString(jsonPath).then((result) {
-          if (result is String) {
-            data = result;
-          }
-        });
-        await write(data);
-        res = await file.readAsString();
-      }
       return res;
     } catch (e) {
       return e.toString();
@@ -52,8 +42,15 @@ class Storage {
   }
 
   static void useSample() async {
-    (await _localFile).delete();
-    await read();
+    if ((await (await _localFile).readAsString())?.isEmpty ?? true) {
+      final jsonPath = 'assets/words.json';
+      await rootBundle.loadString(jsonPath).then((result) {
+        if (result is String) {
+          data = result;
+        }
+      });
+      await write(data);
+    }
   }
 
   static void update(List<Word> words) {

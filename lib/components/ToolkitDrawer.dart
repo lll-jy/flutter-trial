@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../storage/Storage.dart';
-import '../model/Word.dart';
 import 'NewWordPage.dart';
 
 toolkitDrawer(context, words) => Drawer(
