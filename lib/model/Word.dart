@@ -77,6 +77,10 @@ class Word {
       == DateFormat('yyyy-MM-dd').format(target);
   }
 
+  bool test() {
+    return speech == Speech.n;
+  }
+
   static Speech strToSpeech(String str) {
     switch (str) {
     case 'n.':

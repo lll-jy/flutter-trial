@@ -7,9 +7,11 @@ import 'EditWordPage.dart';
 
 class ViewPage extends StatefulWidget {
   final List<Word> words;
+  final List<Word> selectedWords;
   final int index;
 
-  ViewPage({Key key, @required context, @required this.words, @required this.index}) : super(key: key);
+  ViewPage({Key key, @required context, @required this.words,
+    @required this.selectedWords, @required this.index}) : super(key: key);
 
   @override
   _ViewPageState createState() => _ViewPageState();
@@ -17,7 +19,7 @@ class ViewPage extends StatefulWidget {
 
 class _ViewPageState extends State<ViewPage> {
   Word getWord() {
-    return widget.words[widget.index];
+    return widget.selectedWords[widget.index];
   }
 
   List<Word> getWords() {
@@ -60,7 +62,8 @@ class _ViewPageState extends State<ViewPage> {
                 children: <Widget>[
                   RaisedButton(
                     onPressed: () {
-                      openEditWordPage(context, getWords(), widget.index);
+                      openEditWordPage(context, getWords(),
+                          widget.selectedWords, widget.index);
                     },
                     child: Text('Edit'),
                   ),

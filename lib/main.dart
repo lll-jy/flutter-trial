@@ -39,6 +39,15 @@ class _MyHomePageState extends State<MyHomePage> {
     }));
   }
   List<Word> allWords() => parseWords((() {fetchWords(); return resBody;})());
+  List<Word> getSelectedWords(Function checker) {
+    List<Word> res = [];
+    allWords().forEach((element) {
+      if (checker(element) == true) {
+        res.add(element);
+      }
+    });
+    return res;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: WordList(words: allWords()),
+      body: WordList(words: allWords(), selectedWords: getSelectedWords((e) => true),),
       drawer: ToolkitDrawer(words: allWords()),
     );
   }

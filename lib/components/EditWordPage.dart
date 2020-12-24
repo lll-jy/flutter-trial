@@ -7,9 +7,11 @@ import 'CategoryCheckbox.dart';
 
 class EditWordPage extends StatefulWidget {
   final List<Word> words;
+  final List<Word> selectedWords;
   final int index;
 
-  EditWordPage({Key key, @required context, @required this.words, @required this.index}) : super(key: key);
+  EditWordPage({Key key, @required context, @required this.words,
+    @required this.selectedWords, @required this.index}) : super(key: key);
 
   @override
   _EditWordPageState createState() => _EditWordPageState();
@@ -52,20 +54,20 @@ class _EditWordPageState extends State<EditWordPage> {
   @override
   void initState() {
     super.initState();
-    Word thisWord = widget.words[widget.index];
+    Word thisWord = widget.selectedWords[widget.index];
     word = thisWord.word;
     speech = thisWord.speech;
     glossary = thisWord.glossary;
     example = thisWord.example;
     categories = getCategoryMap(thisWord.categories);
     _wordController = new TextEditingController(
-      text: widget.words[widget.index].word
+      text: word
     );
     _glossaryController = new TextEditingController(
-      text: widget.words[widget.index].glossary
+      text: glossary
     );
     _exampleController = new TextEditingController(
-      text: widget.words[widget.index].example
+      text: example
     );
   }
 
@@ -206,12 +208,13 @@ class _EditWordPageState extends State<EditWordPage> {
               ElevatedButton(
                 onPressed: () {
                   List<Word> words = widget.words;
-                  widget.words[widget.index].reset(word, speech,
+                  widget.selectedWords[widget.index].reset(word, speech,
                       glossary, example, getCategories());
                   Storage.update(words);
                   Navigator.pop(context, 'Updated!');
                   Navigator.pop(context, '');
-                  openViewPage(context, words, widget.index);
+                  openViewPage(context, words,
+                      widget.selectedWords, widget.index);
                 },
                 child: Text('Submit')
               )
@@ -223,7 +226,8 @@ class _EditWordPageState extends State<EditWordPage> {
   }
 }
 
-void openEditWordPage(BuildContext context, List<Word> words, int index) {
+void openEditWordPage(BuildContext context, List<Word> words,
+    List<Word> selectedWords, int index) {
   Navigator.push(context, MaterialPageRoute(
     builder: (BuildContext context) {
       return EditWordPage(context: context, words: words, index: index,);

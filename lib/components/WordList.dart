@@ -10,8 +10,9 @@ import 'ViewPage.dart';
 
 class WordList extends StatefulWidget {
   final List<Word> words;
+  final List<Word> selectedWords;
 
-  WordList({Key key, @required this.words}) : super(key: key);
+  WordList({Key key, @required this.words, @required this.selectedWords}) : super(key: key);
 
   @override
   _WordListState createState() => _WordListState();
@@ -59,28 +60,29 @@ class _WordListState extends State<WordList> {
                           DataColumn(label: Text(''))
                         ],
                         rows: List<DataRow>.generate(
-                            widget.words.length, (index) => DataRow(
-                            color: MaterialStateProperty.resolveWith<Color>(
-                                    (Set<MaterialState> states) {
-                                  if (states.contains(MaterialState.selected))
-                                    return Theme.of(context).colorScheme.primary.withOpacity(0.08);
-                                  if (index % 2 == 0) return Colors.grey.withOpacity(0.3);
-                                  return null; // Use default value for other states and odd rows.
-                                }),
-                            cells: [
-                              DataCell(Text(widget.words[index].word)),
-                              DataCell(RaisedButton(
-                                onPressed: () {
-                                  openViewPage(context, widget.words, index);
-                                },
-                                child: Text('View'),
-                              ))
-                            ],
-                            selected: checkSelected(index),
-                            onSelectChanged: (bool value) {
-                              setState(() {
-                                selected[index] = value;
-                              });
+                          widget.selectedWords.length, (index) => DataRow(
+                          color: MaterialStateProperty.resolveWith<Color>(
+                                  (Set<MaterialState> states) {
+                                if (states.contains(MaterialState.selected))
+                                  return Theme.of(context).colorScheme.primary.withOpacity(0.08);
+                                if (index % 2 == 0) return Colors.grey.withOpacity(0.3);
+                                return null; // Use default value for other states and odd rows.
+                              }),
+                          cells: [
+                            DataCell(Text(widget.selectedWords[index].word)),
+                            DataCell(RaisedButton(
+                              onPressed: () {
+                                openViewPage(context, widget.words,
+                                    widget.selectedWords, index);
+                              },
+                              child: Text('View'),
+                            ))
+                          ],
+                          selected: checkSelected(index),
+                          onSelectChanged: (bool value) {
+                            setState(() {
+                              selected[index] = value;
+                            });
                             }
                         )
                         )
@@ -102,10 +104,12 @@ class _WordListState extends State<WordList> {
   }
 }
 
-void openViewPage(BuildContext context, List<Word> words, int index) {
+void openViewPage(BuildContext context, List<Word> words,
+    List<Word> selectedWords, int index) {
   Navigator.push(context, MaterialPageRoute(
       builder: (BuildContext context) {
-        return ViewPage(context: context, words: words, index: index);
+        return ViewPage(context: context, words: words,
+            selectedWords: selectedWords,index: index);
       }
   ));
 }
@@ -118,7 +122,6 @@ Future<List<Word>> fetchWords(http.Client client) async {
 }
 
 List<Word> parseWords(String responseBody) {
-  //throw Exception(responseBody);
   final parsed = jsonDecode(responseBody).cast<Map<String, dynamic>>();
   return parsed.map<Word>((json) => Word.fromJson(json)).toList();
 }
