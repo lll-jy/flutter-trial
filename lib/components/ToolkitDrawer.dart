@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../storage/Storage.dart';
+
 toolkitDrawer(context) => Drawer(
     child: ListView(
       padding: EdgeInsets.zero,
@@ -23,11 +25,36 @@ toolkitDrawer(context) => Drawer(
           ),
         ),
         ListTile(
-          title: Text('Button1'),
+          title: Text('') // placeholder
+        ),
+        ListTile(
+          title: Text('Refresh with sample data'),
           onTap: () {
+            Storage.useSample();
             Navigator.pop(context);
+          },
+        ),
+        ListTile(
+          title: Text('Add new words'),
+          onTap: () {
+            openNewWordPage(context);
           },
         )
       ],
     )
 );
+
+void openNewWordPage(BuildContext context) {
+  Navigator.push(context, MaterialPageRoute(
+      builder: (BuildContext context) {
+        return Scaffold(
+          appBar: AppBar(
+            title: Text('Add new word')
+          ),
+          body: Center(
+            child: Text('test page')
+          ),
+        );
+      }
+  ));
+}
