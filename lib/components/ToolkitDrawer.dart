@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../storage/Storage.dart';
+import '../model/Word.dart';
 import 'NewWordPage.dart';
 
-toolkitDrawer(context) => Drawer(
+toolkitDrawer(context, words) => Drawer(
     child: ListView(
       padding: EdgeInsets.zero,
       children: <Widget>[
@@ -38,17 +39,18 @@ toolkitDrawer(context) => Drawer(
         ListTile(
           title: Text('Add new words'),
           onTap: () {
-            openNewWordPage(context);
+            openNewWordPage(context, words);
           },
         )
       ],
     )
 );
 
-void openNewWordPage(BuildContext context) {
+void openNewWordPage(BuildContext context, List<Word> words) {
   Navigator.push(context, MaterialPageRoute(
       builder: (BuildContext context) {
-        return newWordPage(context);
+        //return newWordPage(context);
+        return NewWordPage(context: context, words: words);
       }
   ));
 }

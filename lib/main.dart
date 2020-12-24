@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'components/WordList.dart';
 import 'components/ToolkitDrawer.dart';
 import 'storage/Storage.dart';
+import 'model/Word.dart';
 
 void main() {
   runApp(MyApp());
@@ -69,10 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
       resBody = value;
     }));
   }
-
-  void _reWriteWithSample() {
-    Storage.useSample();
-  }
+  List<Word> allWords() => parseWords((() {fetchWords(); return resBody;})());
 
   @override
   Widget build(BuildContext context) {
@@ -105,7 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
             //      .map((e) => e.toJsonString()).toList().toString()
             //),
             WordList(
-                words: parseWords((() {fetchWords(); return resBody;})())
+                words: allWords()
             )
           ],
         ),
@@ -115,7 +113,7 @@ class _MyHomePageState extends State<MyHomePage> {
       //  tooltip: 'Increment',
       //  child: Icon(Icons.add),
       //),
-      drawer: toolkitDrawer(context),
+      drawer: toolkitDrawer(context, allWords()),
     );
   }
 }
