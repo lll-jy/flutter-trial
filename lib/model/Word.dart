@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:intl/intl.dart';
 
 enum Speech {
@@ -17,27 +15,13 @@ class Word {
   final String example;
   final DateTime createdAt;
   final DateTime lastReviewAt;
+  final int expectedInterval;
   final List<Category> categories;
 
   Word({this.word, this.speech, this.glossary, this.example,
-    this.createdAt, this.lastReviewAt, this.categories});
-
-  static String test() {
-    String json = jsonEncode(Word(
-      word: 'test',
-      speech: Speech.v,
-      glossary: 'test glossary',
-      example: 'this is a test',
-      createdAt: DateTime.parse('2020-12-23 15:25:00'),
-      lastReviewAt: DateTime.parse('2020-12-23 15:25:00'),
-      categories: [Category.GRE]
-    ));
-    return json;
-    //writeCounter(1);
-  }
+    this.createdAt, this.lastReviewAt, this.expectedInterval, this.categories});
 
   factory Word.fromJson(Map<String, dynamic> json) {
-    //test();
     return Word(
       word: json['word'] as String,
       speech: strToSpeech(json['speech'] as String),
@@ -45,12 +29,13 @@ class Word {
       example: json['example'] as String,
       createdAt: DateTime.parse(json['createdAt'] as String),
       lastReviewAt: DateTime.parse(json['lastReviewAt'] as String),
+      expectedInterval: json['expectedInterval'] as int,
       categories: (json['categories'] as List<dynamic>).map((e) =>
           strToCategory(e)).toList()
     );
   }
 
-  String toJsonString() => '\n  {${getWord()}${getSpeech()}${getGlossary()}${getExample()}${getCreatedAt()}${getLastReviewAt()}${getCategories()}\n  }';
+  String toJsonString() => '\n  {${getWord()}${getSpeech()}${getGlossary()}${getExample()}${getCreatedAt()}${getLastReviewAt()}${getExpectedInterval()}${getCategories()}\n  }';
 
   String getWord() => '\n    "word": "$word",';
 
@@ -60,9 +45,11 @@ class Word {
 
   String getExample() => '\n    "example": "$example",';
 
-  String getCreatedAt() => '\n    "createdAt": "${DateFormat('yyyy-MM-dd HH:mm:ss').format(createdAt)}",';
+  String getCreatedAt() => '\n    "createdAt": "${DateFormat('yyyy-MM-dd').format(createdAt)}",';
 
-  String getLastReviewAt() => '\n    "lastReviewAt": "${DateFormat('yyyy-MM-dd HH:mm:ss').format(lastReviewAt)}",';
+  String getLastReviewAt() => '\n    "lastReviewAt": "${DateFormat('yyyy-MM-dd').format(lastReviewAt)}",';
+
+  String getExpectedInterval() => '\n    "expectedInterval": $expectedInterval,';
 
   String getCategories() => '\n    "categories": ${categories.map((e) => '"${categoryToStr(e)}"').toList()}';
 
