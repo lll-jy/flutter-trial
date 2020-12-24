@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../storage/Storage.dart';
+import 'NewWordPage.dart';
 
 toolkitDrawer(context) => Drawer(
     child: ListView(
@@ -47,14 +48,7 @@ toolkitDrawer(context) => Drawer(
 void openNewWordPage(BuildContext context) {
   Navigator.push(context, MaterialPageRoute(
       builder: (BuildContext context) {
-        return Scaffold(
-          appBar: AppBar(
-            title: Text('Add new word')
-          ),
-          body: Center(
-            child: Text('test page')
-          ),
-        );
+        return newWordPage(context);
       }
   ));
 }
