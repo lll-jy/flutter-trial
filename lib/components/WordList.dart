@@ -118,6 +118,7 @@ Future<List<Word>> fetchWords(http.Client client) async {
 }
 
 List<Word> parseWords(String responseBody) {
+  //throw Exception(responseBody);
   final parsed = jsonDecode(responseBody).cast<Map<String, dynamic>>();
   return parsed.map<Word>((json) => Word.fromJson(json)).toList();
 }

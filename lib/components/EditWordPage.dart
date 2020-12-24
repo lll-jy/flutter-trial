@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import '../model/Word.dart';
 import '../storage/Storage.dart';
 import 'CategoryCheckbox.dart';
+import 'ViewPage.dart';
 
 class EditWordPage extends StatefulWidget {
   final List<Word> words;
-  final Word word;
+  final int index;
 
-  EditWordPage({Key key, @required context, @required this.words, @required this.word}) : super(key: key);
+  EditWordPage({Key key, @required context, @required this.words, @required this.index}) : super(key: key);
 
   @override
   _EditWordPageState createState() => _EditWordPageState();
@@ -45,7 +46,9 @@ class _EditWordPageState extends State<EditWordPage> {
   @override
   void initState() {
     super.initState();
-    _wordController = new TextEditingController(text: widget.word.word);
+    _wordController = new TextEditingController(
+      text: widget.words[widget.index].word
+    );
   }
 
   @override
@@ -183,9 +186,20 @@ class _EditWordPageState extends State<EditWordPage> {
               ElevatedButton(
                 onPressed: () {
                   List<Word> words = widget.words;
-                  widget.word.reset(word, speech, glossary, example, getCategories());
+                  widget.words[widget.index].reset(word, speech,
+                      glossary, example, getCategories());
                   Storage.update(words);
-                  Navigator.pop(context, 'New word saved!');
+                  Navigator.pop(context, 'Updated!');
+                  Navigator.pop(context, '');
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (BuildContext context) {
+                      return ViewPage(
+                        context: context,
+                        words: words,
+                        index: widget.index
+                      );
+                    }
+                  ));
                 },
                 child: Text('Submit')
               )
@@ -197,10 +211,10 @@ class _EditWordPageState extends State<EditWordPage> {
   }
 }
 
-void openEditWordPage(BuildContext context, List<Word> words, Word word) {
+void openEditWordPage(BuildContext context, List<Word> words, int index) {
   Navigator.push(context, MaterialPageRoute(
     builder: (BuildContext context) {
-      return EditWordPage(context: context, words: words, word: word,);
+      return EditWordPage(context: context, words: words, index: index,);
     }
   ));
 }

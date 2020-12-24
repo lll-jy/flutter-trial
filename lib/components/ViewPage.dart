@@ -60,7 +60,7 @@ class _ViewPageState extends State<ViewPage> {
                 children: <Widget>[
                   RaisedButton(
                     onPressed: () {
-                      openEditWordPage(context, getWords(), getWord());
+                      openEditWordPage(context, getWords(), widget.index);
                     },
                     child: Text('Edit'),
                   ),
