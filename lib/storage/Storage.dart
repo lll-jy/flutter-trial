@@ -48,4 +48,9 @@ class Storage {
       return e.toString();
     }
   }
+
+  static void useSample() async {
+    (await _localFile).delete();
+    await read();
+  }
 }

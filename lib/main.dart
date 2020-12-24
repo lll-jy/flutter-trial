@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'dart:convert';
-
 import 'components/WordList.dart';
+import 'components/ToolkitDrawer.dart';
 import 'storage/Storage.dart';
 
 void main() {
@@ -71,6 +70,10 @@ class _MyHomePageState extends State<MyHomePage> {
     }));
   }
 
+  void _reWriteWithSample() {
+    Storage.useSample();
+  }
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -122,11 +125,25 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
+      //floatingActionButton: FloatingActionButton(
+      //  onPressed: _incrementCounter,
+      //  tooltip: 'Increment',
+      //  child: Icon(Icons.add),
+      //),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+        onPressed: _reWriteWithSample,
+        tooltip: 'Rewrite',
+        child: Icon(Icons.create),
+      ),
+      // Drawer adapted from https://flutter.dev/docs/cookbook/design/drawer
+      drawer: toolkitDrawer(context),
     );
   }
 }
+
+final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+final Container bottomSheet = Container(
+  color: Colors.red,
+  height: 250,
+  child: Text('test container'),
+);
