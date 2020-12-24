@@ -33,14 +33,16 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   String resBody = '';
-  Function filter = (e) => true;
+  Function todayFilter = (e) => true;
+  Function categoryFilter = (e) => true;
   void fetchWords() {
     Storage.read().then((value) => setState(() {
       resBody = value;
     }));
   }
   List<Word> allWords() => parseWords((() {fetchWords(); return resBody;})());
-  List<Word> getSelectedWords(Function checker) {
+  List<Word> getSelectedWords() {
+    Function checker = (e) => todayFilter(e) && categoryFilter(e);
     List<Word> res = [];
     allWords().forEach((element) {
       if (checker(element) == true) {
@@ -49,9 +51,14 @@ class _MyHomePageState extends State<MyHomePage> {
     });
     return res;
   }
-  _updateFilter(Function checker) {
+  _updateTodayFilter(Function checker) {
     setState(() {
-      filter = checker;
+      todayFilter = checker;
+    });
+  }
+  _updateCategoryFilter(Function checker) {
+    setState(() {
+      categoryFilter = checker;
     });
   }
 
@@ -61,8 +68,12 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: WordList(words: allWords(), selectedWords: getSelectedWords(filter),),
-      drawer: ToolkitDrawer(words: allWords(), updateFilter: _updateFilter,),
+      body: WordList(words: allWords(), selectedWords: getSelectedWords(),),
+      drawer: ToolkitDrawer(
+        words: allWords(),
+        updateTodayFilter: _updateTodayFilter,
+        updateCategoryFilter: _updateCategoryFilter,
+      ),
     );
   }
 }

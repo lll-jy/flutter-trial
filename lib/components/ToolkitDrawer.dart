@@ -6,9 +6,11 @@ import 'NewWordPage.dart';
 
 class ToolkitDrawer extends StatefulWidget {
   final List<Word> words;
-  final Function updateFilter;
+  final Function updateTodayFilter;
+  final Function updateCategoryFilter;
 
-  ToolkitDrawer({Key key, @required this.words, @required this.updateFilter}) : super(key: key);
+  ToolkitDrawer({Key key, @required this.words, @required this.updateTodayFilter,
+    @required this.updateCategoryFilter}) : super(key: key);
 
   @override
   _ToolkitDrawerState createState() => _ToolkitDrawerState();
@@ -59,7 +61,10 @@ class _ToolkitDrawerState extends State<ToolkitDrawer> {
             ),
             Row(
               children: <Widget>[
-                Text('   Show words assigned today only'),
+                Text(
+                  '    Show words assigned today only',
+                  style: TextStyle(fontWeight: FontWeight.w500),
+                ),
                 Switch(
                   value: showTodayOnly,
                   onChanged: (val) {
@@ -67,13 +72,29 @@ class _ToolkitDrawerState extends State<ToolkitDrawer> {
                       showTodayOnly = val;
                     });
                     if (val) {
-                      widget.updateFilter((Word e) => e.isAssignedToday());
+                      widget.updateTodayFilter((Word e) => e.isAssignedToday());
                     } else {
-                      widget.updateFilter((e) => true);
+                      widget.updateTodayFilter((e) => true);
                     }
                   },
                 )
               ],
+            ),
+            ListTile(
+              title: Text('All categories'),
+              onTap: () {
+                widget.updateCategoryFilter((e) => true);
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text('CET4'),
+              onTap: () {
+                widget.updateCategoryFilter(
+                  (Word e) => e.categories.contains(Category.CET4)
+                );
+                Navigator.pop(context);
+              },
             )
           ],
         )
