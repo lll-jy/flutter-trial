@@ -50,15 +50,21 @@ class Word {
     );
   }
 
-  Map<String, dynamic> toJson() => {
-    'word': word,
-    'speech': speechToStr(speech),
-    'glossary': glossary,
-    'example': example,
-    'createdAt': DateFormat('yyyy-MM-dd HH:mm:ss').format(createdAt),
-    'lastReviewAt': DateFormat('yyyy-MM-dd HH:mm:ss').format(lastReviewAt),
-    'categories': categories.map((e) => categoryToStr(e)).toList()
-  };
+  String toJsonString() => '\n  {${getWord()}${getSpeech()}${getGlossary()}${getExample()}${getCreatedAt()}${getLastReviewAt()}${getCategories()}\n  }';
+
+  String getWord() => '\n    "word": "$word",';
+
+  String getSpeech() => '\n    "speech": "${speechToStr(speech)}",';
+
+  String getGlossary() => '\n    "glossary": "$glossary",';
+
+  String getExample() => '\n    "example": "$example",';
+
+  String getCreatedAt() => '\n    "createdAt": "${DateFormat('yyyy-MM-dd HH:mm:ss').format(createdAt)}",';
+
+  String getLastReviewAt() => '\n    "lastReviewAt": "${DateFormat('yyyy-MM-dd HH:mm:ss').format(lastReviewAt)}",';
+
+  String getCategories() => '\n    "categories": ${categories.map((e) => '"${categoryToStr(e)}"').toList()}';
 
   static Speech strToSpeech(String str) {
     switch (str) {

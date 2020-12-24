@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'dart:convert';
+
 import 'components/WordList.dart';
 import 'storage/Storage.dart';
 
@@ -110,10 +112,10 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),
-            Text(
-              parseWords((() {fetchWords(); return resBody;})())
-                  .map((e) => e.toJson()).toString() + '\n\n' + resBody
-            ),
+            //Text(
+            //  parseWords((() {fetchWords(); return resBody;})())
+            //      .map((e) => e.toJsonString()).toList().toString()
+            //),
             WordList(
                 words: parseWords((() {fetchWords(); return resBody;})())
             )
