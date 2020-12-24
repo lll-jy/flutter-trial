@@ -46,6 +46,17 @@ class _EditWordPageState extends State<EditWordPage> {
     return res;
   }
 
+  int getIndex() {
+    int res = 0;
+    while (res < widget.words.length) {
+      if (widget.words[res].isSameWord(widget.word)) {
+        return res;
+      }
+      res++;
+    }
+    return -1;
+  }
+
   TextEditingController _wordController;
   TextEditingController _glossaryController;
   TextEditingController _exampleController;
@@ -207,11 +218,16 @@ class _EditWordPageState extends State<EditWordPage> {
               ElevatedButton(
                 onPressed: () {
                   List<Word> words = widget.words;
-                  widget.word.reset(word, speech, glossary, example, getCategories());
+                  int index = getIndex();
+                  if (index < 0) {
+                    throw Exception('index $index is invalid');
+                  }
+                  words[index].reset(word, speech, glossary,
+                      example, getCategories());
                   Storage.update(words);
                   Navigator.pop(context, 'Updated!');
                   Navigator.pop(context, '');
-                  openViewPage(context, words, widget.word);
+                  openViewPage(context, words, words[index]);
                 },
                 child: Text('Submit')
               )

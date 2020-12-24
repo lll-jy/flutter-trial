@@ -77,6 +77,10 @@ class Word {
       == DateFormat('yyyy-MM-dd').format(target);
   }
 
+  bool isSameWord(Word other) {
+    return word == other.word;
+  }
+
   static Speech strToSpeech(String str) {
     switch (str) {
     case 'n.':
