@@ -47,57 +47,65 @@ class _WordListState extends State<WordList> {
     return Center(
       child: Column(
         children: <Widget>[
-          SizedBox(
-            width: double.infinity,
-            child: DataTable(
-              columns: const <DataColumn>[
-                DataColumn(label: Text('Words')),
-                DataColumn(label: Text(''))
-              ],
-              rows: List<DataRow>.generate(
-                widget.words.length, (index) => DataRow(
-                  color: MaterialStateProperty.resolveWith<Color>(
-                      (Set<MaterialState> states) {
-                    if (states.contains(MaterialState.selected))
-                      return Theme.of(context).colorScheme.primary.withOpacity(0.08);
-                    if (index % 2 == 0) return Colors.grey.withOpacity(0.3);
-                    return null; // Use default value for other states and odd rows.
-                  }),
-                  cells: [
-                    DataCell(Text(widget.words[index].word)),
-                    DataCell(RaisedButton(
-                      onPressed: () {
-                        openViewPage(context, widget.words, widget.words[index]);
-                      },
-                      child: Text('View'),
-                    ))
-                  ],
-                  selected: checkSelected(index),
-                  onSelectChanged: (bool value) {
-                    setState(() {
-                      selected[index] = value;
-                    });
-                  }
-                )
-              )
+          Expanded(
+            child: ListView(
+              shrinkWrap: true,
+              children: <Widget>[
+                SizedBox(
+                    width: double.infinity,
+                    child: DataTable(
+                        columns: const <DataColumn>[
+                          DataColumn(label: Text('Words')),
+                          DataColumn(label: Text(''))
+                        ],
+                        rows: List<DataRow>.generate(
+                            widget.words.length, (index) => DataRow(
+                            color: MaterialStateProperty.resolveWith<Color>(
+                                    (Set<MaterialState> states) {
+                                  if (states.contains(MaterialState.selected))
+                                    return Theme.of(context).colorScheme.primary.withOpacity(0.08);
+                                  if (index % 2 == 0) return Colors.grey.withOpacity(0.3);
+                                  return null; // Use default value for other states and odd rows.
+                                }),
+                            cells: [
+                              DataCell(Text(widget.words[index].word)),
+                              DataCell(RaisedButton(
+                                onPressed: () {
+                                  openViewPage(context, widget.words, index);
+                                },
+                                child: Text('View'),
+                              ))
+                            ],
+                            selected: checkSelected(index),
+                            onSelectChanged: (bool value) {
+                              setState(() {
+                                selected[index] = value;
+                              });
+                            }
+                        )
+                        )
+                    )
+                ),
+                Text(''), // placeholder
+                RaisedButton(
+                  onPressed: () {
+                    _doneSelected();
+                  },
+                  child: Text('I\'ve reviewed selected words today'),
+                ),
+              ]
             )
           ),
-          RaisedButton(
-            onPressed: () {
-              _doneSelected();
-            },
-            child: Text('I\'ve reviewed selected words today'),
-          )
         ]
       )
     );
   }
 }
 
-void openViewPage(BuildContext context, List<Word> words, Word word) {
+void openViewPage(BuildContext context, List<Word> words, int index) {
   Navigator.push(context, MaterialPageRoute(
       builder: (BuildContext context) {
-        return ViewPage(context: context, words: words, word: word);
+        return ViewPage(context: context, words: words, index: index);
       }
   ));
 }

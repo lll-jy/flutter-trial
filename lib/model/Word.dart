@@ -53,6 +53,14 @@ class Word {
 
   String getCategories() => '\n    "categories": ${categories.map((e) => '"${categoryToStr(e)}"').toList()}';
 
+  void reset(String word, Speech speech, String glossary, String example, List<Category> categories) {
+    this.word = word;
+    this.speech = speech;
+    this.glossary = glossary;
+    this.example = example;
+    this.categories = categories;
+  }
+
   void review() {
     DateTime current = DateTime.now();
     if (lastReviewAt.year != current.year || lastReviewAt.month != current.month

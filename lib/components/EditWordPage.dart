@@ -4,16 +4,17 @@ import '../model/Word.dart';
 import '../storage/Storage.dart';
 import 'CategoryCheckbox.dart';
 
-class NewWordPage extends StatefulWidget {
+class EditWordPage extends StatefulWidget {
   final List<Word> words;
+  final Word word;
 
-  NewWordPage({Key key, @required context, @required this.words}) : super(key: key);
+  EditWordPage({Key key, @required context, @required this.words, @required this.word}) : super(key: key);
 
   @override
-  _NewWordPageState createState() => _NewWordPageState();
+  _EditWordPageState createState() => _EditWordPageState();
 }
 
-class _NewWordPageState extends State<NewWordPage> {
+class _EditWordPageState extends State<EditWordPage> {
   String word;
   Speech speech = Speech.n;
   String glossary;
@@ -39,6 +40,14 @@ class _NewWordPageState extends State<NewWordPage> {
     return res;
   }
 
+  TextEditingController _wordController;
+
+  @override
+  void initState() {
+    super.initState();
+    _wordController = new TextEditingController(text: widget.word.word);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,6 +69,7 @@ class _NewWordPageState extends State<NewWordPage> {
                     word = value;
                   });
                 },
+                controller: _wordController,
               ),
               FractionallySizedBox(
                 widthFactor: 1,
@@ -173,16 +183,7 @@ class _NewWordPageState extends State<NewWordPage> {
               ElevatedButton(
                 onPressed: () {
                   List<Word> words = widget.words;
-                  words.add(Word(
-                      word: word,
-                      speech: speech,
-                      glossary: glossary,
-                      example: example,
-                      createdAt: DateTime.now(),
-                      lastReviewAt: DateTime.now(),
-                      expectedInterval: 1,
-                      categories: getCategories()
-                  ));
+                  widget.word.reset(word, speech, glossary, example, getCategories());
                   Storage.update(words);
                   Navigator.pop(context, 'New word saved!');
                 },
@@ -196,10 +197,10 @@ class _NewWordPageState extends State<NewWordPage> {
   }
 }
 
-void openNewWordPage(BuildContext context, List<Word> words) {
+void openEditWordPage(BuildContext context, List<Word> words, Word word) {
   Navigator.push(context, MaterialPageRoute(
     builder: (BuildContext context) {
-      return NewWordPage(context: context, words: words);
+      return EditWordPage(context: context, words: words, word: word,);
     }
   ));
 }

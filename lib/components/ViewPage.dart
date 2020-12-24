@@ -3,31 +3,39 @@ import 'package:flutter/material.dart';
 
 import '../model/Word.dart';
 import '../storage/Storage.dart';
-import 'NewWordPage.dart';
+import 'EditWordPage.dart';
 
 class ViewPage extends StatefulWidget {
   final List<Word> words;
-  final Word word;
+  final int index;
 
-  ViewPage({Key key, @required context, @required this.words, @required this.word}) : super(key: key);
+  ViewPage({Key key, @required context, @required this.words, @required this.index}) : super(key: key);
 
   @override
   _ViewPageState createState() => _ViewPageState();
 }
 
 class _ViewPageState extends State<ViewPage> {
+  Word getWord() {
+    return widget.words[widget.index];
+  }
+
+  List<Word> getWords() {
+    return widget.words;
+  }
+
   void _deleteThis() {
-    List<Word> words = widget.words;
-    words.remove(widget.word);
+    List<Word> words = getWords();
+    words.remove(getWord());
     Storage.update(words);
-    Navigator.pop(context, '${widget.word.word} deleted');
+    Navigator.pop(context, '${getWord().word} deleted');
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.word.word),
+        title: Text(getWord().word),
       ),
       body: Center(
         child: FractionallySizedBox(
@@ -37,22 +45,22 @@ class _ViewPageState extends State<ViewPage> {
             children: <Widget>[
               Text(''), // placeholder
               Text(
-                '${widget.word.word}   ${Word.speechToStr(widget.word.speech)}',
+                '${getWord().word}   ${Word.speechToStr(getWord().speech)}',
                 style: TextStyle(
                   fontSize: 25,
                   fontWeight: FontWeight.bold
                 ),
               ),
               Text(''), // placeholder
-              Text('${widget.word.glossary}'),
+              Text('${getWord().glossary}'),
               Text(''), // placeholder
-              Text('e.g. ${widget.word.example}'),
+              Text('e.g. ${getWord().example}'),
               Text(''), // placeholder
               Row(
                 children: <Widget>[
                   RaisedButton(
                     onPressed: () {
-                      openEditWordPage(context, widget.words, widget.word);
+                      openEditWordPage(context, getWords(), getWord());
                     },
                     child: Text('Edit'),
                   ),
