@@ -2,6 +2,7 @@ import 'package:flutter/cupertino%202.dart';
 import 'package:flutter/material.dart';
 
 import '../model/Word.dart';
+import '../storage/Storage.dart';
 
 class ViewPage extends StatefulWidget {
   final List<Word> words;
@@ -14,6 +15,13 @@ class ViewPage extends StatefulWidget {
 }
 
 class _ViewPageState extends State<ViewPage> {
+  void _deleteThis() {
+    List<Word> words = widget.words;
+    words.remove(widget.word);
+    Storage.update(words);
+    Navigator.pop(context, '${widget.word.word} deleted');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +47,19 @@ class _ViewPageState extends State<ViewPage> {
               Text(''), // placeholder
               Text('e.g. ${widget.word.example}'),
               Text(''), // placeholder
-
+              Row(
+                children: <Widget>[
+                  RaisedButton(
+                    onPressed: () {},
+                    child: Text('Edit'),
+                  ),
+                  Text('   '), // placeholder
+                  ElevatedButton(
+                      onPressed: _deleteThis,
+                      child: Text('Delete')
+                  ),
+                ],
+              ),
             ],
           )
         ),
