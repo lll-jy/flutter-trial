@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 
 import '../model/Word.dart';
 import '../storage/Storage.dart';
+import 'CategoryCheckbox.dart';
 
 class NewWordPage extends StatefulWidget {
   final List<Word> words;
+  final Word word;
 
-  NewWordPage({Key key, @required context, @required this.words}) : super(key: key);
+  NewWordPage({Key key, @required context, @required this.words, this.word}) : super(key: key);
 
   @override
   _NewWordPageState createState() => _NewWordPageState();
@@ -172,6 +174,7 @@ class _NewWordPageState extends State<NewWordPage> {
               ElevatedButton(
                 onPressed: () {
                   List<Word> words = widget.words;
+                  words.remove(widget.word);
                   words.add(Word(
                     word: word,
                     speech: speech,
@@ -195,34 +198,18 @@ class _NewWordPageState extends State<NewWordPage> {
   }
 }
 
-// Adapted from https://api.flutter.dev/flutter/material/CheckboxListTile-class.html
-class CategoryCheckbox extends StatelessWidget {
-  const CategoryCheckbox({this.label, this.value, this.onChanged});
+void openNewWordPage(BuildContext context, List<Word> words) {
+  Navigator.push(context, MaterialPageRoute(
+    builder: (BuildContext context) {
+      return NewWordPage(context: context, words: words);
+    }
+  ));
+}
 
-  final String label;
-  final bool value;
-  final Function onChanged;
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        onChanged(!value);
-      },
-      child: Padding(
-        padding:EdgeInsets.symmetric(horizontal: 20.0),
-        child: Row(
-          children: <Widget>[
-            Expanded(child: Text(label)),
-            Checkbox(
-              value: value,
-                onChanged: (val) {
-                  onChanged(val);
-                }
-            )
-          ],
-        ),
-      ),
-    );
-  }
+void openEditWordPage(BuildContext context, List<Word> words, Word word) {
+  Navigator.push(context, MaterialPageRoute(
+    builder: (BuildContext context) {
+      return NewWordPage(context: context, words: words, word: word);
+    }
+  ));
 }

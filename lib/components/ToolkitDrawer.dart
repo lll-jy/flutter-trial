@@ -45,11 +45,3 @@ toolkitDrawer(context, words) => Drawer(
       ],
     )
 );
-
-void openNewWordPage(BuildContext context, List<Word> words) {
-  Navigator.push(context, MaterialPageRoute(
-      builder: (BuildContext context) {
-        return NewWordPage(context: context, words: words);
-      }
-  ));
-}

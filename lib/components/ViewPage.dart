@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../model/Word.dart';
 import '../storage/Storage.dart';
+import 'NewWordPage.dart';
 
 class ViewPage extends StatefulWidget {
   final List<Word> words;
@@ -50,7 +51,9 @@ class _ViewPageState extends State<ViewPage> {
               Row(
                 children: <Widget>[
                   RaisedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      openEditWordPage(context, widget.words, widget.word);
+                    },
                     child: Text('Edit'),
                   ),
                   Text('   '), // placeholder
