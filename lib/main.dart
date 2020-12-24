@@ -114,7 +114,13 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),
-            WordList(words: parseWords((() {fetchWords(); return resBody;})()))
+            Text(
+              parseWords((() {fetchWords(); return resBody;})())
+                  .map((e) => e.toJson()).toString() + '\n\n' + resBody
+            ),
+            WordList(
+                words: parseWords((() {fetchWords(); return resBody;})())
+            )
           ],
         ),
       ),

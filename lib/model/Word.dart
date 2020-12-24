@@ -1,9 +1,6 @@
 import 'dart:convert';
-import 'dart:io';
-import 'dart:async';
 
 import 'package:intl/intl.dart';
-import 'package:path_provider/path_provider.dart';
 
 enum Speech {
   n, v, adj, adv, article, pron, prep, conj, interj
@@ -25,15 +22,17 @@ class Word {
   Word({this.word, this.speech, this.glossary, this.example,
     this.createdAt, this.lastReviewAt, this.categories});
 
-  static void test() {
+  static String test() {
     String json = jsonEncode(Word(
-      word: 'test', speech: Speech.v,
+      word: 'test',
+      speech: Speech.v,
       glossary: 'test glossary',
       example: 'this is a test',
       createdAt: DateTime.parse('2020-12-23 15:25:00'),
       lastReviewAt: DateTime.parse('2020-12-23 15:25:00'),
       categories: [Category.GRE]
     ));
+    return json;
     //writeCounter(1);
   }
 
