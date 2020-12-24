@@ -70,6 +70,13 @@ class Word {
     }
   }
 
+  bool isAssignedToday() {
+    DateTime target = lastReviewAt;
+    target = target.add(new Duration(days: expectedInterval));
+    return DateFormat('yyyy-MM-dd').format(DateTime.now())
+      == DateFormat('yyyy-MM-dd').format(target);
+  }
+
   static Speech strToSpeech(String str) {
     switch (str) {
     case 'n.':
