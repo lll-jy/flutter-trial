@@ -73,7 +73,7 @@ class _WordListState extends State<WordList> {
                             DataCell(RaisedButton(
                               onPressed: () {
                                 openViewPage(context, widget.words,
-                                    widget.selectedWords, index);
+                                    widget.selectedWords[index]);
                               },
                               child: Text('View'),
                             ))
@@ -104,12 +104,10 @@ class _WordListState extends State<WordList> {
   }
 }
 
-void openViewPage(BuildContext context, List<Word> words,
-    List<Word> selectedWords, int index) {
+void openViewPage(BuildContext context, List<Word> words, Word word) {
   Navigator.push(context, MaterialPageRoute(
       builder: (BuildContext context) {
-        return ViewPage(context: context, words: words,
-            selectedWords: selectedWords,index: index);
+        return ViewPage(context: context, words: words, word: word,);
       }
   ));
 }

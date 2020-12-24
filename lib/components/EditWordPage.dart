@@ -7,11 +7,10 @@ import 'CategoryCheckbox.dart';
 
 class EditWordPage extends StatefulWidget {
   final List<Word> words;
-  final List<Word> selectedWords;
-  final int index;
+  final Word word;
 
   EditWordPage({Key key, @required context, @required this.words,
-    @required this.selectedWords, @required this.index}) : super(key: key);
+    @required this.word}) : super(key: key);
 
   @override
   _EditWordPageState createState() => _EditWordPageState();
@@ -54,7 +53,7 @@ class _EditWordPageState extends State<EditWordPage> {
   @override
   void initState() {
     super.initState();
-    Word thisWord = widget.selectedWords[widget.index];
+    Word thisWord = widget.word;
     word = thisWord.word;
     speech = thisWord.speech;
     glossary = thisWord.glossary;
@@ -208,13 +207,11 @@ class _EditWordPageState extends State<EditWordPage> {
               ElevatedButton(
                 onPressed: () {
                   List<Word> words = widget.words;
-                  widget.selectedWords[widget.index].reset(word, speech,
-                      glossary, example, getCategories());
+                  widget.word.reset(word, speech, glossary, example, getCategories());
                   Storage.update(words);
                   Navigator.pop(context, 'Updated!');
                   Navigator.pop(context, '');
-                  openViewPage(context, words,
-                      widget.selectedWords, widget.index);
+                  openViewPage(context, words, widget.word);
                 },
                 child: Text('Submit')
               )
@@ -226,11 +223,10 @@ class _EditWordPageState extends State<EditWordPage> {
   }
 }
 
-void openEditWordPage(BuildContext context, List<Word> words,
-    List<Word> selectedWords, int index) {
+void openEditWordPage(BuildContext context, List<Word> words, Word word) {
   Navigator.push(context, MaterialPageRoute(
     builder: (BuildContext context) {
-      return EditWordPage(context: context, words: words, index: index,);
+      return EditWordPage(context: context, words: words, word: word);
     }
   ));
 }
