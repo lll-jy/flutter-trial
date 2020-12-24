@@ -1,9 +1,9 @@
+import 'package:first_trial/components/WordList.dart';
 import 'package:flutter/material.dart';
 
 import '../model/Word.dart';
 import '../storage/Storage.dart';
 import 'CategoryCheckbox.dart';
-import 'ViewPage.dart';
 
 class EditWordPage extends StatefulWidget {
   final List<Word> words;
@@ -20,16 +20,7 @@ class _EditWordPageState extends State<EditWordPage> {
   Speech speech = Speech.n;
   String glossary;
   String example;
-  DateTime createdAt;
-  DateTime lastReviewAt;
-  Map<Category, bool> categories = {
-    Category.CET4: false,
-    Category.CET8: false,
-    Category.GRE: false,
-    Category.GMAT: false,
-    Category.SAT: false,
-    Category.TOEFL: false
-  };
+  Map<Category, bool> categories;
 
   List<Category> getCategories() {
     List<Category> res = [];
@@ -41,13 +32,40 @@ class _EditWordPageState extends State<EditWordPage> {
     return res;
   }
 
+  Map<Category, bool> getCategoryMap(List<Category> categories) {
+    Map<Category, bool> res = {
+      Category.CET4: false,
+      Category.CET8: false,
+      Category.GRE: false,
+      Category.GMAT: false,
+      Category.SAT: false,
+      Category.TOEFL: false
+    };
+    categories.forEach((element) {res[element] = true;});
+    return res;
+  }
+
   TextEditingController _wordController;
+  TextEditingController _glossaryController;
+  TextEditingController _exampleController;
 
   @override
   void initState() {
     super.initState();
+    Word thisWord = widget.words[widget.index];
+    word = thisWord.word;
+    speech = thisWord.speech;
+    glossary = thisWord.glossary;
+    example = thisWord.example;
+    categories = getCategoryMap(thisWord.categories);
     _wordController = new TextEditingController(
       text: widget.words[widget.index].word
+    );
+    _glossaryController = new TextEditingController(
+      text: widget.words[widget.index].glossary
+    );
+    _exampleController = new TextEditingController(
+      text: widget.words[widget.index].example
     );
   }
 
@@ -86,10 +104,10 @@ class _EditWordPageState extends State<EditWordPage> {
                     });
                   },
                   items: <String>['n.', 'v.', 'adj.', 'adv.', 'article', 'pron.',
-                    'prep.', 'conj.', 'interj.']
-                      .map<DropdownMenuItem<String>>((e) => DropdownMenuItem(
-                      value: e,
-                      child: Text(e)
+                      'prep.', 'conj.', 'interj.']
+                    .map<DropdownMenuItem<String>>((e) => DropdownMenuItem(
+                    value: e,
+                    child: Text(e),
                   )).toList()
                 ),
               ),
@@ -104,6 +122,7 @@ class _EditWordPageState extends State<EditWordPage> {
                 },
                 maxLines: 5,
                 minLines: 1,
+                controller: _glossaryController,
               ),
               TextField(
                 decoration: InputDecoration(
@@ -116,6 +135,7 @@ class _EditWordPageState extends State<EditWordPage> {
                 },
                 maxLines: 5,
                 minLines: 1,
+                controller: _exampleController,
               ),
               Text(''), // placeholder
               FractionallySizedBox(
@@ -191,15 +211,7 @@ class _EditWordPageState extends State<EditWordPage> {
                   Storage.update(words);
                   Navigator.pop(context, 'Updated!');
                   Navigator.pop(context, '');
-                  Navigator.push(context, MaterialPageRoute(
-                    builder: (BuildContext context) {
-                      return ViewPage(
-                        context: context,
-                        words: words,
-                        index: widget.index
-                      );
-                    }
-                  ));
+                  openViewPage(context, words, widget.index);
                 },
                 child: Text('Submit')
               )
