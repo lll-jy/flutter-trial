@@ -4,6 +4,8 @@ import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'dart:async';
 
+import '../model/Word.dart';
+
 class Storage {
   static final String fileName = '/words.txt';
   static String data = '';
@@ -52,5 +54,10 @@ class Storage {
   static void useSample() async {
     (await _localFile).delete();
     await read();
+  }
+
+  static void update(List<Word> words) {
+    String toWrite = words.map((e) => e.toJsonString()).toList().toString();
+    write(toWrite);
   }
 }

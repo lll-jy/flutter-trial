@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../model/Word.dart';
+import '../storage/Storage.dart';
 
 class NewWordPage extends StatefulWidget {
   final List<Word> words;
@@ -18,7 +19,24 @@ class _NewWordPageState extends State<NewWordPage> {
   String example;
   DateTime createdAt;
   DateTime lastReviewAt;
-  List<Category> categories;
+  Map<Category, bool> categories = {
+    Category.CET4: false,
+    Category.CET8: false,
+    Category.GRE: false,
+    Category.GMAT: false,
+    Category.SAT: false,
+    Category.TOEFL: false
+  };
+
+  List<Category> getCategories() {
+    List<Category> res = [];
+    categories.forEach((key, value) {
+      if (value == true) {
+        res.add(key);
+      }
+    });
+    return res;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -85,14 +103,124 @@ class _NewWordPageState extends State<NewWordPage> {
                 maxLines: 5,
                 minLines: 1,
               ),
+              Text(''), // placeholder
+              FractionallySizedBox(
+                widthFactor: 1,
+                alignment: Alignment.topLeft,
+                child: Text(
+                  'Categories:',
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                      fontSize: 15
+                  ),
+                ),
+              ),
+              CategoryCheckbox(
+                label: 'CET4',
+                value: categories[Category.CET4],
+                onChanged: (v) {
+                  setState(() {
+                    categories[Category.CET4] = v;
+                  });
+                },
+              ),
+              CategoryCheckbox(
+                label: 'CET8',
+                value: categories[Category.CET8],
+                onChanged: (v) {
+                  setState(() {
+                    categories[Category.CET8] = v;
+                  });
+                },
+              ),
+              CategoryCheckbox(
+                label: 'GRE',
+                value: categories[Category.GRE],
+                onChanged: (v) {
+                  setState(() {
+                    categories[Category.GRE] = v;
+                  });
+                },
+              ),
+              CategoryCheckbox(
+                label: 'SAT',
+                value: categories[Category.SAT],
+                onChanged: (v) {
+                  setState(() {
+                    categories[Category.SAT] = v;
+                  });
+                },
+              ),
+              CategoryCheckbox(
+                label: 'TOEFL',
+                value: categories[Category.TOEFL],
+                onChanged: (v) {
+                  setState(() {
+                    categories[Category.TOEFL] = v;
+                  });
+                },
+              ),
+              CategoryCheckbox(
+                label: 'GMAT',
+                value: categories[Category.GMAT],
+                onChanged: (v) {
+                  setState(() {
+                    categories[Category.GMAT] = v;
+                  });
+                },
+              ),
               ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context, 'New word saved!');
-                  },
-                  child: Text('Submit')
+                onPressed: () {
+                  List<Word> words = widget.words;
+                  words.add(Word(
+                    word: word,
+                    speech: speech,
+                    glossary: glossary,
+                    example: example,
+                    createdAt: DateTime.now(),
+                    lastReviewAt: DateTime.now(),
+                    expectedInterval: 1,
+                    categories: getCategories()
+                  ));
+                  Storage.update(words);
+                  Navigator.pop(context, 'New word saved!');
+                },
+                child: Text('Submit')
               )
             ],
           )
+        ),
+      ),
+    );
+  }
+}
+
+// Adapted from https://api.flutter.dev/flutter/material/CheckboxListTile-class.html
+class CategoryCheckbox extends StatelessWidget {
+  const CategoryCheckbox({this.label, this.value, this.onChanged});
+
+  final String label;
+  final bool value;
+  final Function onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        onChanged(!value);
+      },
+      child: Padding(
+        padding:EdgeInsets.symmetric(horizontal: 20.0),
+        child: Row(
+          children: <Widget>[
+            Expanded(child: Text(label)),
+            Checkbox(
+              value: value,
+                onChanged: (val) {
+                  onChanged(val);
+                }
+            )
+          ],
         ),
       ),
     );
