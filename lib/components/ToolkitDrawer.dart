@@ -6,8 +6,9 @@ import 'NewWordPage.dart';
 
 class ToolkitDrawer extends StatefulWidget {
   final List<Word> words;
+  final Function updateFilter;
 
-  ToolkitDrawer({Key key, @required this.words}) : super(key: key);
+  ToolkitDrawer({Key key, @required this.words, @required this.updateFilter}) : super(key: key);
 
   @override
   _ToolkitDrawerState createState() => _ToolkitDrawerState();
@@ -65,6 +66,11 @@ class _ToolkitDrawerState extends State<ToolkitDrawer> {
                     setState(() {
                       showTodayOnly = val;
                     });
+                    if (val) {
+                      widget.updateFilter((Word e) => e.isAssignedToday());
+                    } else {
+                      widget.updateFilter((e) => true);
+                    }
                   },
                 )
               ],

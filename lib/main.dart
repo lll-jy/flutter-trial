@@ -33,6 +33,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   String resBody = '';
+  Function filter = (e) => true;
   void fetchWords() {
     Storage.read().then((value) => setState(() {
       resBody = value;
@@ -48,6 +49,11 @@ class _MyHomePageState extends State<MyHomePage> {
     });
     return res;
   }
+  _updateFilter(Function checker) {
+    setState(() {
+      filter = checker;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,8 +61,8 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: WordList(words: allWords(), selectedWords: getSelectedWords((e) => true),),
-      drawer: ToolkitDrawer(words: allWords()),
+      body: WordList(words: allWords(), selectedWords: getSelectedWords(filter),),
+      drawer: ToolkitDrawer(words: allWords(), updateFilter: _updateFilter,),
     );
   }
 }
