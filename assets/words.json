@@ -88,5 +88,65 @@
     "lastReviewAt": "2020-12-23",
     "expectedInterval": 7,
     "categories": ["CET4", "CET8", "GRE", "TOEFL", "SAT", "GMAT"]
+  },
+  {
+    "word": "good",
+    "speech": "adj.",
+    "glossary": "of high quality or an acceptable standard",
+    "example": "They've done a reasonably good job.",
+    "createdAt": "2020-12-24",
+    "lastReviewAt": "2020-12-24",
+    "expectedInterval": 7,
+    "categories": ["CET4", "CET8", "GRE", "TOEFL", "SAT", "GMAT"]
+  },
+  {
+    "word": "well",
+    "speech": "adv.",
+    "glossary": "in a good, right or acceptable way",
+    "example": "They played well in the tournament.",
+    "createdAt": "2020-12-24",
+    "lastReviewAt": "2020-12-24",
+    "expectedInterval": 7,
+    "categories": ["CET4", "CET8", "GRE", "TOEFL", "SAT", "GMAT"]
+  },
+  {
+    "word": "rose",
+    "speech": "n.",
+    "glossary": "a flower with a sweet smell that grows on a bush with thorns (= sharp points) on its stems",
+    "example": "a bunch of red roses",
+    "createdAt": "2020-12-24",
+    "lastReviewAt": "2020-12-24",
+    "expectedInterval": 7,
+    "categories": ["CET4", "CET8", "GRE", "TOEFL", "SAT", "GMAT"]
+  },
+  {
+    "word": "English",
+    "speech": "n.",
+    "glossary": "the language, originally of England, now spoken in many other countries and used as a language of international communication throughout the world",
+    "example": "She speaks good English.",
+    "createdAt": "2020-12-24",
+    "lastReviewAt": "2020-12-24",
+    "expectedInterval": 7,
+    "categories": ["CET4", "CET8", "GRE", "TOEFL", "SAT", "GMAT"]
+  },
+  {
+    "word": "on",
+    "speech": "prep.",
+    "glossary": "in or into a position covering, touching or forming part of a surface",
+    "example": "There's a mark on your skirt.",
+    "createdAt": "2020-12-24",
+    "lastReviewAt": "2020-12-24",
+    "expectedInterval": 7,
+    "categories": ["CET4", "CET8", "GRE", "TOEFL", "SAT", "GMAT"]
+  },
+  {
+    "word": "but",
+    "speech": "conj.",
+    "glossary": "used to introduce a word or phrase that contrasts with what was said before",
+    "example": "I got it wrong. It wasn't the red one but the blue one.",
+    "createdAt": "2020-12-24",
+    "lastReviewAt": "2020-12-24",
+    "expectedInterval": 7,
+    "categories": ["CET4", "CET8", "GRE", "TOEFL", "SAT", "GMAT"]
   }
 ]

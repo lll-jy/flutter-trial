@@ -47,7 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: WordList(words: allWords()),
-      drawer: toolkitDrawer(context, allWords()),
+      drawer: ToolkitDrawer(words: allWords()),
     );
   }
 }
