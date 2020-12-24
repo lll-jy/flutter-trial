@@ -42,7 +42,7 @@ class _NewWordPageState extends State<NewWordPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text('Add new word')
+        title: Text('Add new word')
       ),
       body: Center(
         child: FractionallySizedBox(

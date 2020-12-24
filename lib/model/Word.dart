@@ -9,14 +9,14 @@ enum Category {
 }
 
 class Word {
-  final String word;
-  final Speech speech;
-  final String glossary;
-  final String example;
-  final DateTime createdAt;
-  final DateTime lastReviewAt;
-  final int expectedInterval;
-  final List<Category> categories;
+  String word;
+  Speech speech;
+  String glossary;
+  String example;
+  DateTime createdAt;
+  DateTime lastReviewAt;
+  int expectedInterval;
+  List<Category> categories;
 
   Word({this.word, this.speech, this.glossary, this.example,
     this.createdAt, this.lastReviewAt, this.expectedInterval, this.categories});
@@ -52,6 +52,15 @@ class Word {
   String getExpectedInterval() => '\n    "expectedInterval": $expectedInterval,';
 
   String getCategories() => '\n    "categories": ${categories.map((e) => '"${categoryToStr(e)}"').toList()}';
+
+  void review() {
+    DateTime current = DateTime.now();
+    if (lastReviewAt.year != current.year || lastReviewAt.month != current.month
+      || lastReviewAt.day != current.day) {
+      lastReviewAt = current;
+      expectedInterval += 2;
+    }
+  }
 
   static Speech strToSpeech(String str) {
     switch (str) {
