@@ -35,6 +35,7 @@ class _MyHomePageState extends State<MyHomePage> {
   String resBody = '';
   Function todayFilter = (e) => true;
   Function categoryFilter = (e) => true;
+  Category shownCategory;
   void fetchWords() {
     Storage.read().then((value) => setState(() {
       resBody = value;
@@ -56,9 +57,10 @@ class _MyHomePageState extends State<MyHomePage> {
       todayFilter = checker;
     });
   }
-  _updateCategoryFilter(Function checker) {
+  _updateCategoryFilter(Function checker, Category category) {
     setState(() {
       categoryFilter = checker;
+      shownCategory = category;
     });
   }
 
@@ -73,6 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
         words: allWords(),
         updateTodayFilter: _updateTodayFilter,
         updateCategoryFilter: _updateCategoryFilter,
+        shownCategory: shownCategory,
       ),
     );
   }
