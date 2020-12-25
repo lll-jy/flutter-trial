@@ -27,7 +27,12 @@ class _ViewPageState extends State<ViewPage> {
 
   void _deleteThis() {
     List<Word> words = getWords();
-    words.remove(getWord());
+    for (Word w in words) {
+      if (w.isSameWord(getWord())) {
+        words.remove(w);
+        break;
+      }
+    }
     Storage.update(words);
     Navigator.pop(context, '${getWord().word} deleted');
   }
