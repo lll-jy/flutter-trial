@@ -1,16 +1,22 @@
 # first_trial
 
-A new Flutter project.
+A word list app implemented using Flutter.
 
-## Getting Started
+## Installation
 
-This project is a starting point for a Flutter application.
+### Android
 
-A few resources to get you started if this is your first Flutter project:
+### iOS
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## Quick start
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Introduction
+
+When the app is started, the interface is as follows, 
+containing a drawer button and a list of words.
+
+![Initial interface](assets/images/initialUi.png)
+
+Note that if the app is started for the first time,
+the list of words is the sample words.
+
