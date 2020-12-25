@@ -6,7 +6,7 @@
     "example": "I took a bite of the apple.",
     "createdAt": "2020-12-23",
     "lastReviewAt": "2020-12-23",
-    "expectedInterval": 7,
+    "expectedInterval": 2,
     "categories": ["CET4", "CET8", "GRE", "TOEFL", "SAT", "GMAT"]
   },
   {
@@ -16,7 +16,7 @@
     "example": "a bunch of bananas",
     "createdAt": "2020-12-23",
     "lastReviewAt": "2020-12-23",
-    "expectedInterval": 7,
+    "expectedInterval": 2,
     "categories": ["CET4", "CET8", "GRE", "TOEFL", "SAT", "GMAT"]
   },
   {
@@ -26,7 +26,7 @@
     "example": "I have a cat called Bo.",
     "createdAt": "2020-12-23",
     "lastReviewAt": "2020-12-23",
-    "expectedInterval": 7,
+    "expectedInterval": 2,
     "categories": ["CET4", "CET8", "GRE", "TOEFL", "SAT", "GMAT"]
   },
   {
@@ -36,7 +36,7 @@
     "example": "I took the dog for a walk.",
     "createdAt": "2020-12-23",
     "lastReviewAt": "2020-12-23",
-    "expectedInterval": 7,
+    "expectedInterval": 2,
     "categories": ["CET4", "CET8", "GRE", "TOEFL", "SAT", "GMAT"]
   },
   {
@@ -46,7 +46,7 @@
     "example": "I was too nervous to eat.",
     "createdAt": "2020-12-23",
     "lastReviewAt": "2020-12-23",
-    "expectedInterval": 7,
+    "expectedInterval": 2,
     "categories": ["CET4", "CET8", "GRE", "TOEFL", "SAT", "GMAT"]
   },
   {
@@ -56,7 +56,7 @@
     "example": "He was very frank about his relationship with the actress.",
     "createdAt": "2020-12-23",
     "lastReviewAt": "2020-12-23",
-    "expectedInterval": 7,
+    "expectedInterval": 2,
     "categories": ["CET4", "CET8", "GRE", "TOEFL", "SAT", "GMAT"]
   },
   {
@@ -66,7 +66,7 @@
     "example": "We picked grapes in the south of France last summer.",
     "createdAt": "2020-12-23",
     "lastReviewAt": "2020-12-23",
-    "expectedInterval": 7,
+    "expectedInterval": 2,
     "categories": ["CET4", "CET8", "GRE", "TOEFL", "SAT", "GMAT"]
   },
   {
@@ -76,7 +76,7 @@
     "example": "Hello John, how are you?",
     "createdAt": "2020-12-23",
     "lastReviewAt": "2020-12-23",
-    "expectedInterval": 7,
+    "expectedInterval": 2,
     "categories": ["CET4", "CET8", "GRE", "TOEFL", "SAT", "GMAT"]
   },
   {
@@ -86,7 +86,7 @@
     "example": "I think I'd better go now.",
     "createdAt": "2020-12-23",
     "lastReviewAt": "2020-12-23",
-    "expectedInterval": 7,
+    "expectedInterval": 2,
     "categories": ["CET4", "CET8", "GRE", "TOEFL", "SAT", "GMAT"]
   },
   {
@@ -96,7 +96,7 @@
     "example": "They've done a reasonably good job.",
     "createdAt": "2020-12-24",
     "lastReviewAt": "2020-12-24",
-    "expectedInterval": 7,
+    "expectedInterval": 2,
     "categories": ["CET4", "CET8", "GRE", "TOEFL", "SAT", "GMAT"]
   },
   {
@@ -106,7 +106,7 @@
     "example": "They played well in the tournament.",
     "createdAt": "2020-12-24",
     "lastReviewAt": "2020-12-24",
-    "expectedInterval": 7,
+    "expectedInterval": 2,
     "categories": ["CET4", "CET8", "GRE", "TOEFL", "SAT", "GMAT"]
   },
   {
@@ -116,7 +116,7 @@
     "example": "a bunch of red roses",
     "createdAt": "2020-12-24",
     "lastReviewAt": "2020-12-24",
-    "expectedInterval": 7,
+    "expectedInterval": 2,
     "categories": ["CET4", "CET8", "GRE", "TOEFL", "SAT", "GMAT"]
   },
   {
@@ -126,7 +126,7 @@
     "example": "She speaks good English.",
     "createdAt": "2020-12-24",
     "lastReviewAt": "2020-12-24",
-    "expectedInterval": 7,
+    "expectedInterval": 2,
     "categories": ["CET4", "CET8", "GRE", "TOEFL", "SAT", "GMAT"]
   },
   {
@@ -136,7 +136,7 @@
     "example": "There's a mark on your skirt.",
     "createdAt": "2020-12-24",
     "lastReviewAt": "2020-12-24",
-    "expectedInterval": 7,
+    "expectedInterval": 2,
     "categories": ["CET4", "CET8", "GRE", "TOEFL", "SAT", "GMAT"]
   },
   {
@@ -146,7 +146,7 @@
     "example": "I got it wrong. It wasn't the red one but the blue one.",
     "createdAt": "2020-12-24",
     "lastReviewAt": "2020-12-24",
-    "expectedInterval": 7,
+    "expectedInterval": 2,
     "categories": ["CET4", "CET8", "GRE", "TOEFL", "SAT", "GMAT"]
   }
 ]

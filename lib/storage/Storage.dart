@@ -9,6 +9,7 @@ import '../model/Word.dart';
 class Storage {
   static final String fileName = '/words.txt';
   static String data = '';
+  static bool firstTime = true;
 
   static Future<String> get _localPath async {
     final directory = await getApplicationDocumentsDirectory();
@@ -35,7 +36,7 @@ class Storage {
     try {
       final file = await _localFile;
       String res = await file.readAsString();
-      /*if (res?.isEmpty ?? true) {
+      if ((res?.isEmpty ?? true) && firstTime) {
         final jsonPath = 'assets/words.json';
         await rootBundle.loadString(jsonPath).then((result) {
           if (result is String) {
@@ -44,7 +45,8 @@ class Storage {
         });
         await write(data);
         res = await file.readAsString();
-      }*/
+      }
+      firstTime = false;
       return res;
     } catch (e) {
       return e.toString();
@@ -59,8 +61,6 @@ class Storage {
       }
     });
     await write(data);
-    //(await _localFile).delete();
-    //await read();
   }
 
   static void update(List<Word> words) {

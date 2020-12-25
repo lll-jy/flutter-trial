@@ -7,18 +7,26 @@ import 'NewWordPage.dart';
 class ToolkitDrawer extends StatefulWidget {
   final List<Word> words;
   final Function updateTodayFilter;
+  final bool isTodayOnly;
   final Function updateCategoryFilter;
   final Category shownCategory;
 
   ToolkitDrawer({Key key, @required this.words, @required this.updateTodayFilter,
-    @required this.updateCategoryFilter, @required this.shownCategory}) : super(key: key);
+    @required this.isTodayOnly, @required this.updateCategoryFilter,
+    @required this.shownCategory}) : super(key: key);
 
   @override
   _ToolkitDrawerState createState() => _ToolkitDrawerState();
 }
 
 class _ToolkitDrawerState extends State<ToolkitDrawer> {
-  bool showTodayOnly = false;
+  bool showTodayOnly;
+
+  @override
+  void initState() {
+    super.initState();
+    showTodayOnly = widget.isTodayOnly;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +53,7 @@ class _ToolkitDrawerState extends State<ToolkitDrawer> {
               ),
             ),
             ListTile(
-                title: Text('') // placeholder
+              title: Text(''), // placeholder
             ),
             ListTile(
               title: Text('Refresh with sample data'),
@@ -73,9 +81,9 @@ class _ToolkitDrawerState extends State<ToolkitDrawer> {
                       showTodayOnly = val;
                     });
                     if (val) {
-                      widget.updateTodayFilter((Word e) => e.isAssignedToday());
+                      widget.updateTodayFilter((Word e) => e.isAssignedToday(), true);
                     } else {
-                      widget.updateTodayFilter((e) => true);
+                      widget.updateTodayFilter((e) => true, false);
                     }
                   },
                 )

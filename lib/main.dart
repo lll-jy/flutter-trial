@@ -34,6 +34,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   String resBody = '';
   Function todayFilter = (e) => true;
+  bool isTodayOnly = false;
   Function categoryFilter = (e) => true;
   Category shownCategory;
   void fetchWords() {
@@ -52,9 +53,10 @@ class _MyHomePageState extends State<MyHomePage> {
     });
     return res;
   }
-  _updateTodayFilter(Function checker) {
+  _updateTodayFilter(Function checker, bool isTodayOnly) {
     setState(() {
       todayFilter = checker;
+      this.isTodayOnly = isTodayOnly;
     });
   }
   _updateCategoryFilter(Function checker, Category category) {
@@ -74,6 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
       drawer: ToolkitDrawer(
         words: allWords(),
         updateTodayFilter: _updateTodayFilter,
+        isTodayOnly: isTodayOnly,
         updateCategoryFilter: _updateCategoryFilter,
         shownCategory: shownCategory,
       ),
