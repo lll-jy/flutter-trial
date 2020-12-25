@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../storage/Storage.dart';
 import '../model/Word.dart';
 import 'NewWordPage.dart';
+import 'BluetoothPage.dart';
 
 class ToolkitDrawer extends StatefulWidget {
   final List<Word> words;
@@ -54,6 +55,12 @@ class _ToolkitDrawerState extends State<ToolkitDrawer> {
             ),
             ListTile(
               title: Text(''), // placeholder
+            ),
+            ListTile(
+              title: Text('Connect to bluetooth'),
+              onTap: () {
+                openBluetoothPage(context);
+              },
             ),
             ListTile(
               title: Text('Refresh with sample data'),
