@@ -60,6 +60,7 @@ class _EditWordPageState extends State<EditWordPage> {
   TextEditingController _wordController;
   TextEditingController _glossaryController;
   TextEditingController _exampleController;
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -90,148 +91,161 @@ class _EditWordPageState extends State<EditWordPage> {
       body: Center(
         child: FractionallySizedBox(
           widthFactor: 0.9,
-          child: Column(
-            children: <Widget>[
-              Text(''), // Placeholder
-              TextField(
-                decoration: InputDecoration(
-                  labelText: 'Word (original form)'
-                ),
-                onChanged: (String value) {
-                  setState(() {
-                    word = value;
-                  });
-                },
-                controller: _wordController,
-              ),
-              FractionallySizedBox(
-                widthFactor: 1,
-                child: DropdownButton<String>(
-                  value: Word.speechToStr(speech),
-                  hint: Text('Select a speech of word'),
-                  isExpanded: true,
-                  onChanged: (String newSpeech) {
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: <Widget>[
+                Text(''), // Placeholder
+                TextFormField(
+                  decoration: InputDecoration(
+                    labelText: 'Word (original form)'
+                  ),
+                  onChanged: (String value) {
                     setState(() {
-                      speech = Word.strToSpeech(newSpeech);
+                      word = value;
                     });
                   },
-                  items: <String>['n.', 'v.', 'adj.', 'adv.', 'article', 'pron.',
-                      'prep.', 'conj.', 'interj.']
-                    .map<DropdownMenuItem<String>>((e) => DropdownMenuItem(
-                    value: e,
-                    child: Text(e),
-                  )).toList()
+                  controller: _wordController,
+                  validator: (value) {
+                    for (Word w in widget.words) {
+                      if (w.word == value) {
+                        return 'This word already exists in the list.';
+                      }
+                    }
+                    return null;
+                  },
                 ),
-              ),
-              TextField(
-                decoration: InputDecoration(
-                    labelText: 'Glossary'
-                ),
-                onChanged: (String value) {
-                  setState(() {
-                    glossary = value;
-                  });
-                },
-                maxLines: 5,
-                minLines: 1,
-                controller: _glossaryController,
-              ),
-              TextField(
-                decoration: InputDecoration(
-                  labelText: 'Example'
-                ),
-                onChanged: (String value) {
-                  setState(() {
-                    example = value;
-                  });
-                },
-                maxLines: 5,
-                minLines: 1,
-                controller: _exampleController,
-              ),
-              Text(''), // placeholder
-              FractionallySizedBox(
-                widthFactor: 1,
-                alignment: Alignment.topLeft,
-                child: Text(
-                  'Categories:',
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                      fontSize: 15
+                FractionallySizedBox(
+                  widthFactor: 1,
+                  child: DropdownButton<String>(
+                    value: Word.speechToStr(speech),
+                    hint: Text('Select a speech of word'),
+                    isExpanded: true,
+                    onChanged: (String newSpeech) {
+                      setState(() {
+                        speech = Word.strToSpeech(newSpeech);
+                      });
+                    },
+                    items: <String>['n.', 'v.', 'adj.', 'adv.', 'article', 'pron.',
+                        'prep.', 'conj.', 'interj.']
+                      .map<DropdownMenuItem<String>>((e) => DropdownMenuItem(
+                      value: e,
+                      child: Text(e),
+                    )).toList()
                   ),
                 ),
-              ),
-              CategoryCheckbox(
-                label: 'CET4',
-                value: categories[Category.CET4],
-                onChanged: (v) {
-                  setState(() {
-                    categories[Category.CET4] = v;
-                  });
-                },
-              ),
-              CategoryCheckbox(
-                label: 'CET8',
-                value: categories[Category.CET8],
-                onChanged: (v) {
-                  setState(() {
-                    categories[Category.CET8] = v;
-                  });
-                },
-              ),
-              CategoryCheckbox(
-                label: 'GRE',
-                value: categories[Category.GRE],
-                onChanged: (v) {
-                  setState(() {
-                    categories[Category.GRE] = v;
-                  });
-                },
-              ),
-              CategoryCheckbox(
-                label: 'SAT',
-                value: categories[Category.SAT],
-                onChanged: (v) {
-                  setState(() {
-                    categories[Category.SAT] = v;
-                  });
-                },
-              ),
-              CategoryCheckbox(
-                label: 'TOEFL',
-                value: categories[Category.TOEFL],
-                onChanged: (v) {
-                  setState(() {
-                    categories[Category.TOEFL] = v;
-                  });
-                },
-              ),
-              CategoryCheckbox(
-                label: 'GMAT',
-                value: categories[Category.GMAT],
-                onChanged: (v) {
-                  setState(() {
-                    categories[Category.GMAT] = v;
-                  });
-                },
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  List<Word> words = widget.words;
-                  int index = getIndex();
-                  if (index < 0) {
-                    throw Exception('index $index is invalid');
-                  }
-                  words[index].reset(word, speech, glossary,
-                      example, getCategories());
-                  Storage.update(words);
-                  Navigator.pop(context, 'Updated!');
-                  Navigator.pop(context, '');
-                  openViewPage(context, words, words[index]);
-                },
-                child: Text('Submit')
-              )
-            ],
+                TextField(
+                  decoration: InputDecoration(
+                      labelText: 'Glossary'
+                  ),
+                  onChanged: (String value) {
+                    setState(() {
+                      glossary = value;
+                    });
+                  },
+                  maxLines: 5,
+                  minLines: 1,
+                  controller: _glossaryController,
+                ),
+                TextField(
+                  decoration: InputDecoration(
+                    labelText: 'Example'
+                  ),
+                  onChanged: (String value) {
+                    setState(() {
+                      example = value;
+                    });
+                  },
+                  maxLines: 5,
+                  minLines: 1,
+                  controller: _exampleController,
+                ),
+                Text(''), // placeholder
+                FractionallySizedBox(
+                  widthFactor: 1,
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    'Categories:',
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                        fontSize: 15
+                    ),
+                  ),
+                ),
+                CategoryCheckbox(
+                  label: 'CET4',
+                  value: categories[Category.CET4],
+                  onChanged: (v) {
+                    setState(() {
+                      categories[Category.CET4] = v;
+                    });
+                  },
+                ),
+                CategoryCheckbox(
+                  label: 'CET8',
+                  value: categories[Category.CET8],
+                  onChanged: (v) {
+                    setState(() {
+                      categories[Category.CET8] = v;
+                    });
+                  },
+                ),
+                CategoryCheckbox(
+                  label: 'GRE',
+                  value: categories[Category.GRE],
+                  onChanged: (v) {
+                    setState(() {
+                      categories[Category.GRE] = v;
+                    });
+                  },
+                ),
+                CategoryCheckbox(
+                  label: 'SAT',
+                  value: categories[Category.SAT],
+                  onChanged: (v) {
+                    setState(() {
+                      categories[Category.SAT] = v;
+                    });
+                  },
+                ),
+                CategoryCheckbox(
+                  label: 'TOEFL',
+                  value: categories[Category.TOEFL],
+                  onChanged: (v) {
+                    setState(() {
+                      categories[Category.TOEFL] = v;
+                    });
+                  },
+                ),
+                CategoryCheckbox(
+                  label: 'GMAT',
+                  value: categories[Category.GMAT],
+                  onChanged: (v) {
+                    setState(() {
+                      categories[Category.GMAT] = v;
+                    });
+                  },
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    if (_formKey.currentState.validate()) {
+                      List<Word> words = widget.words;
+                      int index = getIndex();
+                      if (index < 0) {
+                        throw Exception('index $index is invalid');
+                      }
+                      words[index].reset(word, speech, glossary,
+                          example, getCategories());
+                      Storage.update(words);
+                      Navigator.pop(context, 'Updated!');
+                      Navigator.pop(context, '');
+                      openViewPage(context, words, words[index]);
+                    }
+                  },
+                  child: Text('Submit')
+                )
+              ],
+            )
           )
         ),
       ),
