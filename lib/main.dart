@@ -87,12 +87,15 @@ class _MyHomePageState extends State<MyHomePage> {
         _addDeviceToList(device);
       }
     });
+    widget.flutterBlue.startScan(timeout: Duration(seconds: 4));
     widget.flutterBlue.scanResults.listen((List<ScanResult> results) {
       for (ScanResult result in results) {
         _addDeviceToList(result.device);
       }
     });
-    widget.flutterBlue.startScan();
+    widget.flutterBlue.stopScan();
+    print('here:::');
+    print(widget.devices);
   }
 
   @override
@@ -108,6 +111,7 @@ class _MyHomePageState extends State<MyHomePage> {
         isTodayOnly: isTodayOnly,
         updateCategoryFilter: _updateCategoryFilter,
         shownCategory: shownCategory,
+        devices: widget.devices
       ),
     );
   }

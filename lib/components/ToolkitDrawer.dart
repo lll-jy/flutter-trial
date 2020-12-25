@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blue/flutter_blue.dart';
 
 import '../storage/Storage.dart';
 import '../model/Word.dart';
@@ -11,10 +12,11 @@ class ToolkitDrawer extends StatefulWidget {
   final bool isTodayOnly;
   final Function updateCategoryFilter;
   final Category shownCategory;
+  final List<BluetoothDevice> devices;
 
   ToolkitDrawer({Key key, @required this.words, @required this.updateTodayFilter,
     @required this.isTodayOnly, @required this.updateCategoryFilter,
-    @required this.shownCategory}) : super(key: key);
+    @required this.shownCategory, @required this.devices}) : super(key: key);
 
   @override
   _ToolkitDrawerState createState() => _ToolkitDrawerState();
@@ -59,7 +61,7 @@ class _ToolkitDrawerState extends State<ToolkitDrawer> {
             ListTile(
               title: Text('Connect to bluetooth'),
               onTap: () {
-                openBluetoothPage(context);
+                openBluetoothPage(context, widget.devices);
               },
             ),
             ListTile(
