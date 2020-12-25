@@ -46,6 +46,11 @@ An example of completed form for adding a word is as follows.
 
 ![Add page filled](assets/images/filltedAddForm.png)
 
+Note that the word itself should be unique. If you intend to add a word that already exists in the app,
+you will see something like this after tapping submit button.
+
+![Invalid word](assets/images/validator.png)
+
 After you tap the submit button, you will return to the word list page (with filters, whose details
 will be given in the subsequent sections, retained), and the new word is added to the end of the list.
 The picture below is the result after tapping submit in the previous picture.
