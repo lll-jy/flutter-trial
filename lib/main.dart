@@ -113,6 +113,8 @@ class _MyHomePageState extends State<MyHomePage> {
         shownCategory: shownCategory,
         devices: widget.devices
       ),
+      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomPadding: false,
     );
   }
 }
