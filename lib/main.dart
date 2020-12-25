@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blue/flutter_blue.dart';
 
 import 'components/WordList.dart';
 import 'components/ToolkitDrawer.dart';
@@ -23,6 +24,9 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
+  final FlutterBlue flutterBlue = FlutterBlue.instance;
+  final List<BluetoothDevice> devices = [];
+
   MyHomePage({Key key, this.title}) : super(key: key);
 
   final String title;
@@ -64,6 +68,31 @@ class _MyHomePageState extends State<MyHomePage> {
       categoryFilter = checker;
       shownCategory = category;
     });
+  }
+  _addDeviceToList(final BluetoothDevice device) {
+    if (!widget.devices.contains(device)) {
+      setState(() {
+        widget.devices.add(device);
+      });
+    }
+  }
+
+  // Adapted from https://blog.kuzzle.io/communicate-through-ble-using-flutter
+  @override
+  void initState() {
+    super.initState();
+    widget.flutterBlue.connectedDevices
+        .asStream().listen((List<BluetoothDevice> devices) {
+      for (BluetoothDevice device in devices) {
+        _addDeviceToList(device);
+      }
+    });
+    widget.flutterBlue.scanResults.listen((List<ScanResult> results) {
+      for (ScanResult result in results) {
+        _addDeviceToList(result.device);
+      }
+    });
+    widget.flutterBlue.startScan();
   }
 
   @override
