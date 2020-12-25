@@ -58,8 +58,9 @@ The picture below is the result after tapping submit in the previous picture.
 ![Add result](assets/images/addResult.png)
 
 **Possible feature extensions**
-1. Allow the user to specify customized category
-2. Add validator to avoid repetition
+1. Allow the user to specify customized category.
+1. Find a way to solve situations where one word has multiple meanings, especially multiple possible
+part of speech.
 
 ### View word details
 
