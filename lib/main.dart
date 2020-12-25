@@ -94,8 +94,6 @@ class _MyHomePageState extends State<MyHomePage> {
       }
     });
     widget.flutterBlue.stopScan();
-    print('here:::');
-    print(widget.devices);
   }
 
   @override
@@ -111,7 +109,8 @@ class _MyHomePageState extends State<MyHomePage> {
         isTodayOnly: isTodayOnly,
         updateCategoryFilter: _updateCategoryFilter,
         shownCategory: shownCategory,
-        devices: widget.devices
+        devices: widget.devices,
+        flutterBlue: widget.flutterBlue
       ),
       resizeToAvoidBottomInset: false,
       resizeToAvoidBottomPadding: false,

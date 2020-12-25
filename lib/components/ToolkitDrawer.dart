@@ -13,10 +13,12 @@ class ToolkitDrawer extends StatefulWidget {
   final Function updateCategoryFilter;
   final Category shownCategory;
   final List<BluetoothDevice> devices;
+  final FlutterBlue flutterBlue;
 
   ToolkitDrawer({Key key, @required this.words, @required this.updateTodayFilter,
     @required this.isTodayOnly, @required this.updateCategoryFilter,
-    @required this.shownCategory, @required this.devices}) : super(key: key);
+    @required this.shownCategory, @required this.devices,
+    @required this.flutterBlue}) : super(key: key);
 
   @override
   _ToolkitDrawerState createState() => _ToolkitDrawerState();
@@ -61,7 +63,7 @@ class _ToolkitDrawerState extends State<ToolkitDrawer> {
             ListTile(
               title: Text('Connect to bluetooth'),
               onTap: () {
-                openBluetoothPage(context, widget.devices);
+                openBluetoothPage(context, widget.devices, widget.flutterBlue);
               },
             ),
             ListTile(
