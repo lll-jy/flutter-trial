@@ -21,17 +21,29 @@ class _BluetoothPageState extends State<BluetoothPage> {
   List<BluetoothDevice> connectedDevices;
 
   String dummy(BluetoothDevice device) {
-    device.discoverServices().then((services) {
-      services.forEach((service) {
-        List<BluetoothCharacteristic> characteristics = service.characteristics;
-        for (BluetoothCharacteristic c in characteristics) {
-          c.read().then((value) {
-            print('dummy print: $value');
-          });
-        }
+    if (connectedDevices.contains(device)) {
+      device.discoverServices().then((services) {
+        print('services of device: $services');
+        services.forEach((service) {
+          List<BluetoothCharacteristic> characteristics = service.characteristics;
+          for (BluetoothCharacteristic c in characteristics) {
+            c.read().then((value) {
+              print('dummy print: $value is of type ${c.properties}');
+            });
+            c.descriptors.forEach((descriptor) {
+              descriptor.read().then((value) {
+                print('  dummy print descriptor: $value');
+              });
+            });
+            c.setNotifyValue(true).whenComplete(() {
+              c.value.listen((event) {
+                print('dummy Notify print: $event');
+              });
+            });
+          }
+        });
       });
-    });
-    List<BluetoothService> services;
+    }
     return '';
   }
 
@@ -47,6 +59,7 @@ class _BluetoothPageState extends State<BluetoothPage> {
                     children: <Widget>[
                       Text(device.name == '' ? '(unknown device)' : device.name),
                       Text(device.id.toString()),
+                      Text(dummy(device))
                     ],
                   )
               ),
