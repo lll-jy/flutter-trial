@@ -1,0 +1,152 @@
+[
+  {
+    "word": "apple",
+    "speech": "n.",
+    "glossary": "a round fruit with shiny red or green skin that is fairly hard and white inside",
+    "example": "I took a bite of the apple.",
+    "createdAt": "2020-12-23",
+    "lastReviewAt": "2020-12-23",
+    "expectedInterval": 2,
+    "categories": ["CET4", "CET8", "GRE", "TOEFL", "SAT", "GMAT"]
+  },
+  {
+    "word": "banana",
+    "speech": "n.",
+    "glossary": "a long curved fruit with a thick yellow skin and that is soft inside, which grows on trees in hot countries",
+    "example": "a bunch of bananas",
+    "createdAt": "2020-12-23",
+    "lastReviewAt": "2020-12-23",
+    "expectedInterval": 2,
+    "categories": ["CET4", "CET8", "GRE", "TOEFL", "SAT", "GMAT"]
+  },
+  {
+    "word": "cat",
+    "speech": "n.",
+    "glossary": "a small animal with soft fur that people often keep as a pet. Cats catch and kill birds and mice.",
+    "example": "I have a cat called Bo.",
+    "createdAt": "2020-12-23",
+    "lastReviewAt": "2020-12-23",
+    "expectedInterval": 2,
+    "categories": ["CET4", "CET8", "GRE", "TOEFL", "SAT", "GMAT"]
+  },
+  {
+    "word": "dog",
+    "speech": "n.",
+    "glossary": "an animal with four legs and a tail, often kept as a pet or trained for work, for example hunting or guarding buildings. There are many types of dog, some of which are wild.",
+    "example": "I took the dog for a walk.",
+    "createdAt": "2020-12-23",
+    "lastReviewAt": "2020-12-23",
+    "expectedInterval": 2,
+    "categories": ["CET4", "CET8", "GRE", "TOEFL", "SAT", "GMAT"]
+  },
+  {
+    "word": "eat",
+    "speech": "v.",
+    "glossary": "to put food in your mouth, bite it and swallow it",
+    "example": "I was too nervous to eat.",
+    "createdAt": "2020-12-23",
+    "lastReviewAt": "2020-12-23",
+    "expectedInterval": 2,
+    "categories": ["CET4", "CET8", "GRE", "TOEFL", "SAT", "GMAT"]
+  },
+  {
+    "word": "frank",
+    "speech": "adj.",
+    "glossary": "honest and direct in what you say, sometimes in a way that other people might not like",
+    "example": "He was very frank about his relationship with the actress.",
+    "createdAt": "2020-12-23",
+    "lastReviewAt": "2020-12-23",
+    "expectedInterval": 2,
+    "categories": ["CET4", "CET8", "GRE", "TOEFL", "SAT", "GMAT"]
+  },
+  {
+    "word": "grape",
+    "speech": "n.",
+    "glossary": "a small green or purple fruit that grows in bunches on a climbing plant (called a vine). Wine is made from grapes.",
+    "example": "We picked grapes in the south of France last summer.",
+    "createdAt": "2020-12-23",
+    "lastReviewAt": "2020-12-23",
+    "expectedInterval": 2,
+    "categories": ["CET4", "CET8", "GRE", "TOEFL", "SAT", "GMAT"]
+  },
+  {
+    "word": "hello",
+    "speech": "interj.",
+    "glossary": "used as a greeting when you meet somebody, in an email, when you answer the phone or when you want to attract somebody’s attention",
+    "example": "Hello John, how are you?",
+    "createdAt": "2020-12-23",
+    "lastReviewAt": "2020-12-23",
+    "expectedInterval": 2,
+    "categories": ["CET4", "CET8", "GRE", "TOEFL", "SAT", "GMAT"]
+  },
+  {
+    "word": "I",
+    "speech": "pron.",
+    "glossary": "used as the subject of a verb when the speaker or writer is referring to himself/herself",
+    "example": "I think I'd better go now.",
+    "createdAt": "2020-12-23",
+    "lastReviewAt": "2020-12-23",
+    "expectedInterval": 2,
+    "categories": ["CET4", "CET8", "GRE", "TOEFL", "SAT", "GMAT"]
+  },
+  {
+    "word": "good",
+    "speech": "adj.",
+    "glossary": "of high quality or an acceptable standard",
+    "example": "They've done a reasonably good job.",
+    "createdAt": "2020-12-24",
+    "lastReviewAt": "2020-12-24",
+    "expectedInterval": 2,
+    "categories": ["CET4", "CET8", "GRE", "TOEFL", "SAT", "GMAT"]
+  },
+  {
+    "word": "well",
+    "speech": "adv.",
+    "glossary": "in a good, right or acceptable way",
+    "example": "They played well in the tournament.",
+    "createdAt": "2020-12-24",
+    "lastReviewAt": "2020-12-24",
+    "expectedInterval": 2,
+    "categories": ["CET4", "CET8", "GRE", "TOEFL", "SAT", "GMAT"]
+  },
+  {
+    "word": "rose",
+    "speech": "n.",
+    "glossary": "a flower with a sweet smell that grows on a bush with thorns (= sharp points) on its stems",
+    "example": "a bunch of red roses",
+    "createdAt": "2020-12-24",
+    "lastReviewAt": "2020-12-24",
+    "expectedInterval": 2,
+    "categories": ["CET4", "CET8", "GRE", "TOEFL", "SAT", "GMAT"]
+  },
+  {
+    "word": "English",
+    "speech": "n.",
+    "glossary": "the language, originally of England, now spoken in many other countries and used as a language of international communication throughout the world",
+    "example": "She speaks good English.",
+    "createdAt": "2020-12-24",
+    "lastReviewAt": "2020-12-24",
+    "expectedInterval": 2,
+    "categories": ["CET4", "CET8", "GRE", "TOEFL", "SAT", "GMAT"]
+  },
+  {
+    "word": "on",
+    "speech": "prep.",
+    "glossary": "in or into a position covering, touching or forming part of a surface",
+    "example": "There's a mark on your skirt.",
+    "createdAt": "2020-12-24",
+    "lastReviewAt": "2020-12-24",
+    "expectedInterval": 2,
+    "categories": ["CET4", "CET8", "GRE", "TOEFL", "SAT", "GMAT"]
+  },
+  {
+    "word": "but",
+    "speech": "conj.",
+    "glossary": "used to introduce a word or phrase that contrasts with what was said before",
+    "example": "I got it wrong. It wasn't the red one but the blue one.",
+    "createdAt": "2020-12-24",
+    "lastReviewAt": "2020-12-24",
+    "expectedInterval": 2,
+    "categories": ["CET4", "CET8", "GRE", "TOEFL", "SAT", "GMAT"]
+  }
+]

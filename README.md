@@ -8,7 +8,13 @@ in a dictionary.
 
 ### Android
 
+Download the installation pack here:
+
 ### iOS
+
+**Note**
+
+Please allow the app to access bluetooth, etc.
 
 ## Guide
 
