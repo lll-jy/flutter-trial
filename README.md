@@ -9,6 +9,9 @@ in a dictionary.
 Download the installation pack here:
 [https://github.com/lll-jy/flutter-trial/releases/tag/v0.1.0](https://github.com/lll-jy/flutter-trial/releases/tag/v0.1.0)
 
+If you are deploying as developers using the source code, follow the guide here:
+[https://flutter.dev/docs/get-started/install/](https://flutter.dev/docs/get-started/install/)
+
 **Note**
 
 Please allow the app to access bluetooth, etc.
