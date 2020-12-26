@@ -6,11 +6,8 @@ in a dictionary.
 
 ## Installation
 
-### Android
-
 Download the installation pack here:
-
-### iOS
+[https://github.com/lll-jy/flutter-trial/releases/tag/v0.1.0](https://github.com/lll-jy/flutter-trial/releases/tag/v0.1.0)
 
 **Note**
 
